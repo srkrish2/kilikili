@@ -2,8 +2,8 @@ import { PROMPT } from '../content/prompts';
 import { useEffect, useMemo, useState } from 'react';
 import { Link, Navigate, useNavigate, useParams } from 'react-router-dom';
 import { getLesson, unitOf } from '../content/lessons';
-import { buildPlan, starsFor, type Step } from '../lib/lessonPlan';
-import { actions, isLessonUnlocked, useProgress } from '../lib/progress';
+import { buildPlan, buildPracticePlan, starsFor, type Step } from '../lib/lessonPlan';
+import { actions, getProgress, isLessonUnlocked, useProgress } from '../lib/progress';
 import { speakSequence, stopSpeaking } from '../lib/speech';
 import { sfx } from '../lib/sfx';
 import { Confetti, NextButton, Stars } from '../components/common';
@@ -41,25 +41,41 @@ export function LessonPage() {
 function LessonRun({ id }: { id: string }) {
   const lesson = getLesson(id);
   const progress = useProgress();
+  // Built once per visit; confusions steer the "where is…?" choices.
+  const steps = useMemo(() => (lesson ? buildPlan(lesson, Math.random, getProgress().confusions) : []), [lesson]);
+  if (!lesson || !isLessonUnlocked(progress, lesson.id)) return <Navigate to="/" replace />;
+  return (
+    <LessonPlayer
+      steps={steps}
+      color={unitOf(lesson.id)?.color ?? '#2bb673'}
+      onFinish={(stars) => actions.completeLesson(lesson.id, stars)}
+    />
+  );
+}
+
+/** Practice session built from the child's tricky letters and words. */
+export function PracticePage() {
+  const steps = useMemo(() => buildPracticePlan(getProgress()), []);
+  if (!steps.length) return <Navigate to="/" replace />;
+  return <LessonPlayer steps={steps} color="#ff5d8f" />;
+}
+
+function LessonPlayer({ steps, color, onFinish }: { steps: Step[]; color: string; onFinish?: (stars: number) => void }) {
   const navigate = useNavigate();
-  const steps = useMemo(() => (lesson ? buildPlan(lesson) : []), [lesson]);
   const [index, setIndex] = useState(0);
   const [mistakes, setMistakes] = useState(0);
   const finished = index >= steps.length;
   const stars = starsFor(mistakes);
 
   useEffect(() => {
-    if (!finished || !lesson) return;
-    actions.completeLesson(lesson.id, stars);
+    if (!finished) return;
+    onFinish?.(stars);
     sfx.win();
     speakSequence([PROMPT.wellDone, PROMPT.lessonDone]);
     // Only when the lesson flips to finished.
   }, [finished]);
 
   useEffect(() => stopSpeaking, []);
-
-  if (!lesson || !isLessonUnlocked(progress, lesson.id)) return <Navigate to="/" replace />;
-  const color = unitOf(lesson.id)?.color ?? '#2bb673';
 
   if (finished) {
     return (

@@ -4,6 +4,7 @@ import { UNITS, type Lesson } from '../content/lessons';
 import { getWord } from '../content/words';
 import { currentLessonId, isLessonUnlocked, totalStars, useProgress } from '../lib/progress';
 import { Stars } from '../components/common';
+import { practiceItems } from '../lib/lessonPlan';
 import { sfx } from '../lib/sfx';
 
 function nodeLabel(lesson: Lesson) {
@@ -38,6 +39,8 @@ export function PathPage() {
           ★ {totalStars(progress)}
         </div>
       </header>
+
+      <PracticeCard />
 
       {UNITS.map((unit) => (
         <section key={unit.id} className="unit" style={{ ['--unit' as string]: unit.color }}>
@@ -74,5 +77,41 @@ export function PathPage() {
       ))}
       <div className="path-end">🏆</div>
     </div>
+  );
+}
+
+/** Shown when the child has letters or words they keep getting wrong. */
+function PracticeCard() {
+  const progress = useProgress();
+  const navigate = useNavigate();
+  const { letters, words } = practiceItems(progress);
+  if (!letters.length && !words.length) return null;
+  return (
+    <button
+      className="practice-card"
+      onClick={() => {
+        sfx.tap();
+        navigate('/practice');
+      }}
+    >
+      <span className="practice-icon">🔁</span>
+      <span className="practice-body">
+        <b>பயிற்சி</b>
+        {progress.settings.showEnglish && <small>Practice tricky letters</small>}
+        <span className="practice-items">
+          {letters.map((l) => (
+            <span key={l.char} className="chip">
+              {l.char}
+            </span>
+          ))}
+          {words.map((w) => (
+            <span key={w.text} className="chip">
+              {w.emoji}
+            </span>
+          ))}
+        </span>
+      </span>
+      <span className="practice-go">▶</span>
+    </button>
   );
 }

@@ -1,4 +1,4 @@
-import { useEffect, useMemo, type ReactNode } from 'react';
+import { useEffect, useMemo, useRef, type ReactNode } from 'react';
 import { speakSequence, stopSpeaking } from '../lib/speech';
 
 /** Speaks the given texts when the component mounts (and stops on unmount). */
@@ -89,4 +89,17 @@ export function Prompt({ children, texts }: { children: ReactNode; texts: string
       <span>{children}</span>
     </div>
   );
+}
+
+/**
+ * Returns a function that records only the first answer given in a step, so
+ * practice stats reflect first tries rather than eventual success.
+ */
+export function useFirstAnswer<A extends unknown[]>(record: (...args: A) => void) {
+  const done = useRef(false);
+  return (...args: A) => {
+    if (done.current) return;
+    done.current = true;
+    record(...args);
+  };
 }

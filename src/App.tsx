@@ -1,6 +1,6 @@
 import { HashRouter, NavLink, Navigate, Route, Routes, useLocation } from 'react-router-dom';
 import { PathPage } from './pages/PathPage';
-import { LessonPage } from './pages/LessonPage';
+import { LessonPage, PracticePage } from './pages/LessonPage';
 import { BooksPage } from './pages/BooksPage';
 import { BookReader } from './pages/BookReader';
 import { ChartPage } from './pages/ChartPage';
@@ -16,7 +16,7 @@ const TABS = [
 function TabBar() {
   const { pathname } = useLocation();
   // Lessons and books are full-screen.
-  if (pathname.startsWith('/lesson/') || /^\/books\/.+/.test(pathname)) return null;
+  if (pathname.startsWith('/lesson/') || pathname === '/practice' || /^\/books\/.+/.test(pathname)) return null;
   return (
     <nav className="tab-bar">
       {TABS.map((t) => (
@@ -36,6 +36,7 @@ export function App() {
       <Routes>
         <Route path="/" element={<PathPage />} />
         <Route path="/lesson/:id" element={<LessonPage />} />
+        <Route path="/practice" element={<PracticePage />} />
         <Route path="/letters" element={<ChartPage />} />
         <Route path="/books" element={<BooksPage />} />
         <Route path="/books/:id" element={<BookReader />} />

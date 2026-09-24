@@ -2,10 +2,10 @@ import { PROMPT } from '../content/prompts';
 import { useState } from 'react';
 import type { Letter } from '../content/letters';
 import { graphemes } from '../content/tamil';
-import { NextButton, Prompt, useAutoSpeak } from '../components/common';
+import { NextButton, Prompt, useAutoSpeak, useFirstAnswer } from '../components/common';
 import { randomPraise, speak, speakSequence } from '../lib/speech';
 import { sfx } from '../lib/sfx';
-import { useProgress } from '../lib/progress';
+import { actions, useProgress } from '../lib/progress';
 
 type Done = (mistakes: number) => void;
 
@@ -59,8 +59,11 @@ export function FindLetter({ target, choices, onDone }: { target: Letter; choice
   const ask = [target.say, PROMPT.where];
   useAutoSpeak(ask);
 
+  const record = useFirstAnswer((correct: boolean, picked?: string) => actions.recordLetter(target.char, correct, picked));
+
   const choose = (l: Letter) => {
     if (solved) return;
+    record(l === target, l.char);
     if (l === target) {
       setSolved(true);
       sfx.correct();
@@ -101,6 +104,8 @@ export function PopLetters({ target, bubbles, onDone }: { target: Letter; bubble
   const ask = [target.say, PROMPT.popAll];
   useAutoSpeak(ask);
 
+  const record = useFirstAnswer((correct: boolean, picked?: string) => actions.recordLetter(target.char, correct, picked));
+
   const tap = (b: Letter, i: number) => {
     if (popped.has(i) || remaining === 0) return;
     if (b === target) {
@@ -108,12 +113,14 @@ export function PopLetters({ target, bubbles, onDone }: { target: Letter; bubble
       const next = new Set(popped).add(i);
       setPopped(next);
       if (remaining === 1) {
+        record(true);
         sfx.win();
         speak(randomPraise());
       } else {
         speak(target.say);
       }
     } else {
+      record(false, b.char);
       sfx.wrong();
       setMistakes((m) => m + 1);
       setShaking(i);

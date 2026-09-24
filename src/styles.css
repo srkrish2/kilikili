@@ -1215,3 +1215,89 @@ h2 {
 .slider.done .slider-arrow {
   opacity: 0;
 }
+
+/* ---------- Practice ---------- */
+
+.practice-card {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 18px;
+  margin-bottom: 24px;
+  background: #ffe3ec;
+  border-radius: var(--radius);
+  box-shadow: 0 6px 0 #f5b3c8;
+  text-align: left;
+  animation: bounce-in 0.6s cubic-bezier(0.3, 1.6, 0.6, 1);
+}
+
+.practice-icon {
+  font-size: 38px;
+}
+
+.practice-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.practice-body b {
+  font-size: 24px;
+  color: #d6336c;
+}
+
+.practice-body small {
+  color: var(--muted);
+  font-family: system-ui, sans-serif;
+}
+
+.practice-items {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.chip {
+  background: #fff;
+  border-radius: 10px;
+  padding: 0 10px;
+  font-size: 22px;
+  font-weight: 800;
+}
+
+.practice-go {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: #ff5d8f;
+  color: #fff;
+  display: grid;
+  place-items: center;
+  font-size: 22px;
+  box-shadow: 0 4px 0 #d6336c;
+}
+
+.tricky {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.tricky li {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 6px 0;
+  border-top: 1px solid #f2ebde;
+}
+
+.tamil-lg {
+  font-family: var(--font);
+  font-size: 24px;
+}
+
+.tricky span .tamil-lg {
+  font-size: 18px;
+}

@@ -4,6 +4,7 @@ import { ALL_LESSONS } from '../content/lessons';
 import { BOOKS } from '../content/books';
 import { actions, useProgress } from '../lib/progress';
 import { speak, tamilVoice } from '../lib/speech';
+import { confusedWith, needsPractice } from '../lib/practice';
 
 /** A sum young children can't do yet but any adult can: keeps settings out of little hands. */
 function ParentGate({ onPass }: { onPass: () => void }) {
@@ -84,6 +85,8 @@ export function ParentPage() {
         </p>
       </section>
 
+      <TrickyItems />
+
       <section className="card">
         <h2>Voice</h2>
         <VoiceStatus />
@@ -143,5 +146,46 @@ export function ParentPage() {
         </button>
       </section>
     </div>
+  );
+}
+
+function TrickyItems() {
+  const { letterStats, wordStats, confusions } = useProgress();
+  const letters = needsPractice(letterStats);
+  const words = needsPractice(wordStats);
+  return (
+    <section className="card">
+      <h2>Tricky letters &amp; words</h2>
+      {!letters.length && !words.length ? (
+        <p className="muted">Nothing yet. Letters and words your child gets wrong will show up here and in a 🔁 practice session on the path.</p>
+      ) : (
+        <ul className="tricky">
+          {letters.map((c) => {
+            const mixed = confusedWith(confusions, c)[0];
+            return (
+              <li key={c}>
+                <b className="tamil-lg">{c}</b>
+                <span>
+                  missed {letterStats[c].wrong}× of {letterStats[c].wrong + letterStats[c].right}
+                  {mixed && (
+                    <>
+                      {' '}· confused with <b className="tamil-lg">{mixed}</b> ({confusions[c][mixed]}×)
+                    </>
+                  )}
+                </span>
+              </li>
+            );
+          })}
+          {words.map((w) => (
+            <li key={w}>
+              <b className="tamil-lg">{w}</b>
+              <span>
+                missed {wordStats[w].wrong}× of {wordStats[w].wrong + wordStats[w].right}
+              </span>
+            </li>
+          ))}
+        </ul>
+      )}
+    </section>
   );
 }

@@ -2,11 +2,11 @@ import { PROMPT } from '../content/prompts';
 import { useState } from 'react';
 import type { Word } from '../content/words';
 import { spokenForm } from '../content/tamil';
-import { NextButton, Prompt, useAutoSpeak } from '../components/common';
+import { NextButton, Prompt, useAutoSpeak, useFirstAnswer } from '../components/common';
 import { LetterSlider } from '../components/LetterSlider';
 import { randomPraise, speak, speakSequence } from '../lib/speech';
 import { sfx } from '../lib/sfx';
-import { useProgress } from '../lib/progress';
+import { actions, useProgress } from '../lib/progress';
 
 type Done = (mistakes: number) => void;
 
@@ -43,12 +43,14 @@ export function BlendWord({ word, onDone }: { word: Word; onDone: Done }) {
   );
 }
 
-function useChoice<T>(correct: T, onRight: () => Promise<unknown>, onWrongSpeech: (choice: T) => string[]) {
+function useChoice(correct: Word, onRight: () => Promise<unknown>, onWrongSpeech: (choice: Word) => string[]) {
   const [mistakes, setMistakes] = useState(0);
-  const [shaking, setShaking] = useState<T | null>(null);
+  const [shaking, setShaking] = useState<Word | null>(null);
   const [solved, setSolved] = useState(false);
-  const choose = (c: T, done: Done) => {
+  const record = useFirstAnswer((ok: boolean) => actions.recordWord(correct.text, ok));
+  const choose = (c: Word, done: Done) => {
     if (solved) return;
+    record(c === correct);
     if (c === correct) {
       setSolved(true);
       sfx.correct();
@@ -128,12 +130,15 @@ export function BuildWord({ word, tiles, onDone }: { word: Word; tiles: string[]
   const complete = placed.length === word.tiles.length;
   useAutoSpeak([word.text, PROMPT.build]);
 
+  const record = useFirstAnswer((ok: boolean) => actions.recordWord(word.text, ok));
+
   const tap = (i: number) => {
     if (complete || placed.includes(i)) return;
     if (tiles[i] === word.tiles[placed.length]) {
       const next = [...placed, i];
       setPlaced(next);
       if (next.length === word.tiles.length) {
+        record(true);
         sfx.correct();
         speakSequence([word.text, randomPraise()]);
       } else {
@@ -141,6 +146,7 @@ export function BuildWord({ word, tiles, onDone }: { word: Word; tiles: string[]
         speak(spokenForm(tiles[i]));
       }
     } else {
+      record(false);
       sfx.wrong();
       setMistakes((m) => m + 1);
       setShaking(i);

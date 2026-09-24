@@ -1,6 +1,7 @@
 import { useSyncExternalStore } from 'react';
 import { ALL_LESSONS } from '../content/lessons';
 import type { Book } from '../content/books';
+import { updateStat, type Confusions, type Stats } from './practice';
 
 export interface Settings {
   showEnglish: boolean;
@@ -15,6 +16,10 @@ export interface Progress {
   /** Best star count per finished lesson. */
   stars: Record<string, number>;
   booksRead: Record<string, number>;
+  /** Per-letter and per-word answer history, for practice. */
+  letterStats: Stats;
+  wordStats: Stats;
+  confusions: Confusions;
   settings: Settings;
 }
 
@@ -24,6 +29,9 @@ export const DEFAULT_PROGRESS: Progress = {
   version: 1,
   stars: {},
   booksRead: {},
+  letterStats: {},
+  wordStats: {},
+  confusions: {},
   settings: { showEnglish: false, speechRate: 0.8, readMode: 'word', unlockAll: false },
 };
 
@@ -75,6 +83,24 @@ export const actions = {
   },
   markBookRead(id: string) {
     set({ ...state, booksRead: { ...state.booksRead, [id]: (state.booksRead[id] ?? 0) + 1 } });
+  },
+  /** Record a letter answer. `picked` is the letter chosen by mistake, if any. */
+  recordLetter(char: string, correct: boolean, picked?: string) {
+    const confusions =
+      picked && picked !== char
+        ? {
+            ...state.confusions,
+            [char]: { ...state.confusions[char], [picked]: (state.confusions[char]?.[picked] ?? 0) + 1 },
+          }
+        : state.confusions;
+    set({
+      ...state,
+      letterStats: { ...state.letterStats, [char]: updateStat(state.letterStats[char], correct, Date.now()) },
+      confusions,
+    });
+  },
+  recordWord(text: string, correct: boolean) {
+    set({ ...state, wordStats: { ...state.wordStats, [text]: updateStat(state.wordStats[text], correct, Date.now()) } });
   },
   updateSettings(patch: Partial<Settings>) {
     set({ ...state, settings: { ...state.settings, ...patch } });
