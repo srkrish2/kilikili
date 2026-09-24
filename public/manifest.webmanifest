@@ -1,0 +1,11 @@
+{
+  "name": "கிளிகிளி · Kilikili",
+  "short_name": "கிளிகிளி",
+  "description": "Learn to read Tamil: letters, words and books.",
+  "start_url": ".",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#fff8ec",
+  "theme_color": "#2bb673",
+  "icons": [{ "src": "icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }]
+}
