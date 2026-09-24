@@ -2,7 +2,8 @@ import { PROMPT } from '../content/prompts';
 import { useState } from 'react';
 import type { Word } from '../content/words';
 import { spokenForm } from '../content/tamil';
-import { NextButton, Prompt, SpeakerButton, useAutoSpeak } from '../components/common';
+import { NextButton, Prompt, useAutoSpeak } from '../components/common';
+import { LetterSlider } from '../components/LetterSlider';
 import { randomPraise, speak, speakSequence } from '../lib/speech';
 import { sfx } from '../lib/sfx';
 import { useProgress } from '../lib/progress';
@@ -14,44 +15,26 @@ function English({ word }: { word: Word }) {
   return settings.showEnglish ? <p className="en">{word.en}</p> : null;
 }
 
-/** Tap each letter to hear it, then hear them blend into the word. */
+/** Slide the parrot under the word to sound out each letter, then hear it blend. */
 export function BlendWord({ word, onDone }: { word: Word; onDone: Done }) {
-  const [tapped, setTapped] = useState<Set<number>>(new Set());
   const [blended, setBlended] = useState(false);
-  useAutoSpeak([PROMPT.tapEach]);
-
-  const tap = (i: number) => {
-    const next = new Set(tapped).add(i);
-    setTapped(next);
-    sfx.tap();
-    if (next.size === word.tiles.length && !blended) {
-      // Replay the sounds in order, then the whole word.
-      // Reveal even if the audio was interrupted, so a child is never stuck here.
-      speakSequence([...word.tiles.map(spokenForm), word.text], { gapMs: 150 }).then(() => {
-        setBlended(true);
-        sfx.correct();
-      });
-    } else {
-      speak(spokenForm(word.tiles[i]));
-    }
-  };
+  useAutoSpeak([PROMPT.slide]);
 
   return (
     <div className="activity blend">
-      <Prompt texts={[PROMPT.tapEach]}>👆 ஒவ்வொரு எழுத்தையும் தொடு</Prompt>
+      <Prompt texts={[PROMPT.slide]}>🦜 கிளியை இழுத்துப் படி</Prompt>
       <div className={`picture ${blended ? 'reveal' : 'hidden'}`}>{blended ? word.emoji : '❓'}</div>
-      <div className={`tiles ${blended ? 'joined' : ''}`}>
-        {word.tiles.map((t, i) => (
-          <button key={i} className={`tile ${tapped.has(i) ? 'lit' : ''}`} onClick={() => tap(i)}>
-            {t}
-          </button>
-        ))}
-      </div>
+      <LetterSlider
+        segments={word.tiles}
+        spoken={spokenForm}
+        whole={word.text}
+        onComplete={() => {
+          if (!blended) sfx.correct();
+          setBlended(true);
+        }}
+      />
       {blended && (
         <>
-          <button className="word-big" onClick={() => speak(word.text)}>
-            {word.text}
-          </button>
           <English word={word} />
           <NextButton pulse onClick={() => onDone(0)} />
         </>
@@ -92,10 +75,7 @@ export function MatchPicture({ word, choices, onDone }: { word: Word; choices: W
   return (
     <div className="activity">
       <Prompt texts={[PROMPT.readAndPick]}>📖 படி, படத்தைத் தொடு</Prompt>
-      <div className="word-row">
-        <span className="word-big">{word.text}</span>
-        <SpeakerButton texts={[word.text]} label="உதவி" />
-      </div>
+      <LetterSlider segments={word.tiles} spoken={spokenForm} whole={word.text} />
       <div className="choices">
         {choices.map((c) => (
           <button

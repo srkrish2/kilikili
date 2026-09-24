@@ -1111,3 +1111,107 @@ h2 {
     animation-iteration-count: 1 !important;
   }
 }
+
+/* ---------- Reading slider ---------- */
+
+.slider {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  touch-action: none;
+  padding: 8px 28px 4px;
+  cursor: grab;
+}
+
+.slider-word {
+  display: flex;
+  font-size: clamp(44px, 13vw, 72px);
+  font-weight: 800;
+  line-height: 1.25;
+}
+
+.slider-seg {
+  padding: 0 2px;
+  border-radius: 14px;
+  transition:
+    opacity 0.15s,
+    transform 0.15s,
+    color 0.15s,
+    background 0.15s;
+}
+
+.slider-seg.dim {
+  opacity: 0.2;
+}
+
+.slider-seg.focus {
+  color: var(--unit);
+  background: color-mix(in srgb, var(--unit) 14%, white);
+  transform: scale(1.15) translateY(-4px);
+}
+
+.slider-seg.lit {
+  color: var(--unit);
+}
+
+.slider-track {
+  position: relative;
+  min-width: 120px;
+  height: 14px;
+  background: #eee4d2;
+  border-radius: 999px;
+}
+
+.slider-fill {
+  position: absolute;
+  inset: 0 auto 0 0;
+  background: color-mix(in srgb, var(--unit) 55%, white);
+  border-radius: 999px;
+}
+
+.slider-knob {
+  position: absolute;
+  top: 50%;
+  width: 56px;
+  height: 56px;
+  margin-left: -28px;
+  margin-top: -28px;
+  display: grid;
+  place-items: center;
+  font-size: 34px;
+  background: #fff;
+  border-radius: 50%;
+  box-shadow:
+    0 0 0 4px var(--unit),
+    0 5px 0 4px color-mix(in srgb, var(--unit) 60%, black);
+  pointer-events: none;
+}
+
+.slider:not(.dragging) .slider-knob {
+  transition: left 0.35s cubic-bezier(0.3, 1.4, 0.6, 1);
+}
+
+.slider-knob.nudge {
+  animation: nudge 1.4s ease-in-out infinite;
+}
+
+@keyframes nudge {
+  50% {
+    transform: translateX(18px);
+  }
+}
+
+.slider-arrow {
+  position: absolute;
+  right: -30px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--unit);
+  font-size: 22px;
+  opacity: 0.6;
+}
+
+.slider.done .slider-arrow {
+  opacity: 0;
+}
