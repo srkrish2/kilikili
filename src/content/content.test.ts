@@ -91,3 +91,26 @@ describe('books', () => {
     ]);
   });
 });
+
+describe('stroke order', () => {
+  it('covers every letter a lesson asks the child to trace', async () => {
+    const { STROKES } = await import('./strokes');
+    const traced = ALL_LESSONS.flatMap((l) => (l.kind === 'letters' ? l.items : []));
+    expect(traced.filter((c) => !(c in STROKES))).toEqual([]);
+  });
+
+  it('keeps waypoints inside the glyph box', async () => {
+    const { STROKES } = await import('./strokes');
+    for (const [char, strokes] of Object.entries(STROKES)) {
+      expect(strokes.length, char).toBeGreaterThan(0);
+      for (const s of strokes) {
+        for (const [x, y] of s) {
+          expect(x, char).toBeGreaterThanOrEqual(0);
+          expect(x, char).toBeLessThanOrEqual(1);
+          expect(y, char).toBeGreaterThanOrEqual(0);
+          expect(y, char).toBeLessThanOrEqual(1);
+        }
+      }
+    }
+  });
+});

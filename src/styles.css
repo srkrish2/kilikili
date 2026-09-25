@@ -1301,3 +1301,25 @@ h2 {
 .tricky span .tamil-lg {
   font-size: 18px;
 }
+
+/* Dev-only stroke authoring page */
+.lab {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 8px;
+  background: #fff;
+}
+
+.lab-cell {
+  margin: 0;
+  border: 1px solid #ddd;
+  font-family: system-ui, sans-serif;
+  font-size: 12px;
+  text-align: center;
+}
+
+.trace-board .demo {
+  pointer-events: none;
+  opacity: 0.85;
+}

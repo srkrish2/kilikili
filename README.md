@@ -17,15 +17,21 @@ letters taught before it, so all words can be sounded out.
 
 **Letter activities**
 - *Meet*: big letter, its sound, and a picture word with the letter highlighted (க் + ஆ = கா for vowel signs)
-- *Trace*: finger tracing over the letter, scored by how much of the glyph is covered (so no stroke data is needed)
+- *Trace*: an animated pen first shows the stroke order, with numbered start dots. The child then traces with a finger, scored by how much of the letter is covered.
 - *Where is…?*: hear a sound, tap the matching letter. A wrong tap names the letter the child picked.
 - *Bubble pop*: pop every bubble showing the target letter
 
 **Word activities**
-- *Blend*: tap each letter tile (அ · ம் · மா), then hear it blend into the word and see the picture
-- *Read & match*: read the word, pick its picture
+- *Blend*: drag the 🦜 reading slider under the word. The letter above the finger lights up and is sounded while the others fade; reaching the end blends them into the word and shows the picture.
+- *Read & match*: read the word (with the slider to sound it out), pick its picture
 - *Listen*: hear the word, pick how it's written
 - *Build*: put the letter tiles in order
+
+**Practice** (`src/lib/practice.ts`). Every first-try answer updates a Leitner
+box per letter and word, and a wrong pick is recorded as a confusion (e.g. ண
+chosen for ன). Items that drop to a low box get a 🔁 practice card on the path.
+The practice session uses the child's actual confusions as the wrong answers,
+and regular lessons do too. The Parents tab lists the tricky items.
 
 **Books** (`src/content/books.ts`). Six short books read aloud word by word with
 highlighting. Tap any word to hear it. Swipe to turn pages.
@@ -74,6 +80,17 @@ Stack: Vite + React + TypeScript and HashRouter, with no UI or state libraries.
 
 - Content lives in `src/content/`: plain typed data plus Tamil grapheme helpers.
 - `src/lib/lessonPlan.ts` turns a lesson into a sequence of activity steps. It is pure and seeded, so it's testable.
+
+### Stroke order
+
+`src/content/strokes.ts` holds hand-authored waypoints per letter: where each
+stroke starts, which way it goes round each loop, and where it ends. At
+runtime the letter is rendered and skeletonized (`src/lib/strokes.ts`, using
+Zhang–Suen thinning), and a shortest-path search along the skeleton joins the
+waypoints. The animation therefore follows the exact font shape. To review or
+edit, run `npm run dev` and open `#/dev/strokes` (optionally
+`?only=அ,க&scale=2`). It shows the skeleton, a 0–1 grid, the waypoints and the
+resulting numbered strokes.
 
 ### Adding content
 

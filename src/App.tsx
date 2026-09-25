@@ -5,6 +5,7 @@ import { BooksPage } from './pages/BooksPage';
 import { BookReader } from './pages/BookReader';
 import { ChartPage } from './pages/ChartPage';
 import { ParentPage } from './pages/ParentPage';
+import { StrokeLab } from './pages/StrokeLab';
 
 const TABS = [
   { to: '/', icon: '🗺️', label: 'பாடங்கள்' },
@@ -16,7 +17,7 @@ const TABS = [
 function TabBar() {
   const { pathname } = useLocation();
   // Lessons and books are full-screen.
-  if (pathname.startsWith('/lesson/') || pathname === '/practice' || /^\/books\/.+/.test(pathname)) return null;
+  if (pathname.startsWith('/lesson/') || pathname.startsWith('/dev/') || pathname === '/practice' || /^\/books\/.+/.test(pathname)) return null;
   return (
     <nav className="tab-bar">
       {TABS.map((t) => (
@@ -41,6 +42,7 @@ export function App() {
         <Route path="/books" element={<BooksPage />} />
         <Route path="/books/:id" element={<BookReader />} />
         <Route path="/parents" element={<ParentPage />} />
+        {import.meta.env.DEV && <Route path="/dev/strokes" element={<StrokeLab />} />}
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
       <TabBar />
