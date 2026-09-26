@@ -77,7 +77,7 @@ export function AppStateProvider({ children }: { children: ReactNode }) {
       update((s) => ({
         ...s,
         tripsByDay: log.kind === 'trip' ? { ...s.tripsByDay, [day]: (s.tripsByDay[day] ?? 0) + 1 } : s.tripsByDay,
-        history: [...s.history, { day, ...log }].slice(-HISTORY_LIMIT),
+        history: [...s.history, { day, ...log, ...(log.secs !== undefined ? { secs: Math.round(log.secs) } : {}) }].slice(-HISTORY_LIMIT),
       }));
       setLastResult(result);
     },

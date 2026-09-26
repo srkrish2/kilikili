@@ -9,12 +9,13 @@ export function defaultState(rules: Rules): SavedState {
     progress: {},
     tripsByDay: {},
     onboarded: false,
-    profile: { childName: '', age: null, speakers: [] },
+    profile: { childName: '', age: null, exposure: null, speakers: [] },
     grownups: { previewAllLines: false, preferredVoice: null },
     letters: {},
     lessonsDone: {},
     booksRead: {},
     gameSecondsByDay: {},
+    engineColour: 0,
     voices: {},
     history: [],
   };
@@ -47,6 +48,7 @@ export function normalizeState(raw: unknown, rules: Rules): SavedState {
     lessonsDone: pick('lessonsDone'),
     booksRead: pick('booksRead'),
     gameSecondsByDay: pick('gameSecondsByDay'),
+    engineColour: typeof raw.engineColour === 'number' ? raw.engineColour : d.engineColour,
     voices: pick('voices'),
     history: (Array.isArray(raw.history) ? raw.history : d.history).slice(-HISTORY_LIMIT),
   };

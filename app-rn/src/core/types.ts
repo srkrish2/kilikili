@@ -67,10 +67,25 @@ export interface LetterRules {
 }
 
 export interface GameRules {
-  beachRounds: number;
-  memoryPairs: number;
-  huntRounds: number;
-  huntBubbles: number;
+  _doc?: string;
+  overs: number;
+  overBalls: number;
+  trainYardRounds: number;
+  kolamLetters: number;
+}
+
+export interface OnboardingRules {
+  _doc?: string;
+  exposurePriorScale: Record<Exposure, number>;
+  checkWords: number;
+  checkChoices: number;
+  voiceSetupWords: number;
+}
+
+export interface YardRules {
+  _doc?: string;
+  tripsPerColour: number;
+  engineColours: string[];
 }
 
 export interface Rules {
@@ -82,6 +97,9 @@ export interface Rules {
   daily: { tripsPerDay: number; gameMinutesPerDay: number };
   letters: LetterRules;
   games: GameRules;
+  reading: { blendWordsPerLesson: number };
+  onboarding: OnboardingRules;
+  yard: YardRules;
   unlocks: { lettersLine: { knownWords: number }; readingLine: { knownLetters: number } };
   navigation: {
     tabs: string[];
@@ -103,6 +121,8 @@ export interface CurriculumLetter {
   anchor: LetterAnchor;
   /** Words that start with the letter, for Mayil's sound story and Kili's song. */
   soundWords: { ta: string; en: string; emoji: string }[];
+  /** Mayil's silly sentence (spoken Tamil) using the sound words. */
+  soundStory: { ta: string; en: string };
 }
 
 export interface Line {
@@ -131,7 +151,13 @@ export interface Curriculum {
 /** A written-register word the Reading Line can blend (only letters from the Letters Line). */
 export interface ReadingWord { id: string; ta: string; translit: string; en: string; emoji: string }
 
-export interface BookPage { ta: string; en: string; art: string }
+export interface BookPage {
+  ta: string;
+  en: string;
+  art: string;
+  /** Question the grown-up asks after the page (spoken Tamil). */
+  ask?: { ta: string; en: string };
+}
 export interface Book { id: string; title: string; titleEn: string; cover: string; pages: BookPage[] }
 
 export interface Reading { version: number; _doc?: string; words: ReadingWord[]; books: Book[] }
@@ -186,11 +212,17 @@ export interface SessionLog {
   /** First-try right / scored attempts, when the session scores anything. */
   right?: number;
   of?: number;
+  /** How long it took, for the grown-ups' weekly line. */
+  secs?: number;
 }
+
+export type Exposure = 'daily' | 'sometimes' | 'rarely';
 
 export interface Profile {
   childName: string;
   age: number | null;
+  /** How often he hears Tamil; scales the starting guesses at onboarding. */
+  exposure: Exposure | null;
   /** Voice slot ids of who speaks Tamil at home. */
   speakers: string[];
 }
@@ -222,6 +254,8 @@ export interface SavedState {
   booksRead: Record<string, number>;
   /** Seconds of games played per day (for the daily limit). */
   gameSecondsByDay: Record<DayKey, number>;
+  /** Wagon yard: which engine colour Koo wears (index into rules.yard.engineColours). */
+  engineColour: number;
   /** Which family recordings exist: wordId -> slot ids. Audio files live on the device. */
   voices: Record<string, string[]>;
   history: SessionLog[];

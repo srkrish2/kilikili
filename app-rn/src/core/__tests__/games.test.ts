@@ -1,8 +1,8 @@
 import { describe, expect, it } from 'vitest';
 import { content } from '../../generated/content';
-import { beachRounds, gameSecondsLeft, huntRounds, memoryDeck } from '../games';
+import { cricketBalls, gameSecondsLeft, songActions, trainYardRounds, tripWords } from '../games';
 import { gateProblem } from '../gate';
-import { seeded, state } from './helpers';
+import { knowingWords, seeded, state } from './helpers';
 
 const { rules } = content;
 const words = content.words.words;
@@ -14,29 +14,33 @@ describe('games', () => {
     expect(gameSecondsLeft(state({ gameSecondsByDay: { '2026-09-01': 900 } }), '2026-09-01', rules)).toBe(0);
   });
 
-  it('builds beach rounds with the target among three distinct pictures', () => {
-    const rounds = beachRounds(words, state(), rules, seeded(3));
-    expect(rounds).toHaveLength(rules.games.beachRounds);
-    for (const r of rounds) {
-      expect(r.options.map((o) => o.id)).toContain(r.target.id);
-      expect(new Set(r.options.map((o) => o.emoji)).size).toBe(3);
+  it('only uses words from his trips', () => {
+    expect(tripWords(words, state(), rules)).toEqual([]);
+    expect(cricketBalls(words, state(), rules, seeded(1))).toEqual([]);
+    const s = knowingWords(8);
+    const tw = tripWords(words, s, rules);
+    expect(tw.length).toBeGreaterThan(0);
+    expect(tw.every((w) => s.progress[w.id])).toBe(true);
+  });
+
+  it('bowls two overs with the word among three distinct pictures', () => {
+    const balls = cricketBalls(words, knowingWords(10), rules, seeded(3));
+    expect(balls).toHaveLength(rules.games.overs * rules.games.overBalls);
+    for (const b of balls) {
+      expect(b.options.map((o) => o.id)).toContain(b.word.id);
+      expect(new Set(b.options.map((o) => o.emoji)).size).toBe(3);
     }
   });
 
-  it('deals memory pairs', () => {
-    const deck = memoryDeck(words, state(), rules, seeded(4));
-    expect(deck).toHaveLength(rules.games.memoryPairs * 2);
-    const counts = new Map<string, number>();
-    deck.forEach((c) => counts.set(c.wordId, (counts.get(c.wordId) ?? 0) + 1));
-    expect([...counts.values()].every((n) => n === 2)).toBe(true);
+  it('sings only action words', () => {
+    expect(songActions(words, seeded(2)).every((w) => w.kind === 'action')).toBe(true);
   });
 
-  it('needs two taught letters for a sound hunt', () => {
-    expect(huntRounds(['அ'], rules.games, seeded(1))).toEqual([]);
-    const rounds = huntRounds(['அ', 'ம', 'ப'], rules.games, seeded(1));
-    for (const r of rounds) {
-      expect(r.bubbles).toHaveLength(rules.games.huntBubbles);
-      expect(r.bubbles.filter((b) => b === r.target).length).toBeGreaterThanOrEqual(3);
+  it('sorts two taught letters per Train Yard round', () => {
+    expect(trainYardRounds(['அ'], 3, seeded(1))).toEqual([]);
+    for (const r of trainYardRounds(['அ', 'ம', 'ப'], 4, seeded(1))) {
+      expect(new Set(r.wagons).size).toBe(2);
+      expect(r.letters.every((l) => r.wagons.includes(l))).toBe(true);
     }
   });
 

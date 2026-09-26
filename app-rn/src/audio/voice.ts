@@ -1,6 +1,7 @@
 // What the app says out loud. Family recordings first (the point of Milestone 1),
 // then the device's Tamil text-to-speech as a fallback. If neither exists, say()
 // returns false and the screen falls back to its "Grown-up, say" script.
+import { useEffect, useState } from 'react';
 import { createAudioPlayer, setAudioModeAsync, type AudioPlayer } from 'expo-audio';
 import * as Speech from 'expo-speech';
 import type { SavedState } from '../core';
@@ -90,4 +91,17 @@ export async function sayAll(state: SavedState, items: { key: string | null; tex
 export async function canSay(state: SavedState, key: string | null): Promise<boolean> {
   if (key && slotsFor(state, key).length) return true;
   return hasTamilTts();
+}
+
+/** React hook: can anything say `key` (recording or Tamil TTS)? */
+export function useCanSay(state: SavedState, key: string | null): boolean {
+  const [ok, setOk] = useState(false);
+  const has = key ? (state.voices[key] ?? []).join() : '';
+  useEffect(() => {
+    let live = true;
+    canSay(state, key).then((v) => live && setOk(v));
+    return () => { live = false; };
+    // Only re-check when the recordings for this key change.
+  }, [key, has]);
+  return ok;
 }

@@ -2,7 +2,11 @@
   "version": 1,
   "_doc": "Tunable rules shared by every platform. Change numbers here, never hard-code them in app code. See docs/scoring.md.",
   "scoring": {
-    "priorByHomeFrequency": { "3": 0.6, "2": 0.35, "1": 0.15 },
+    "priorByHomeFrequency": {
+      "3": 0.6,
+      "2": 0.35,
+      "1": 0.15
+    },
     "slip": 0.1,
     "learnRate": 0.03,
     "actionGuess": 0.25,
@@ -21,9 +25,17 @@
   },
   "trip": {
     "defaultLength": 8,
-    "lengthOptions": [6, 8, 10],
+    "lengthOptions": [
+      6,
+      8,
+      10
+    ],
     "defaultChoices": 3,
-    "choiceOptions": [2, 3, 4],
+    "choiceOptions": [
+      2,
+      3,
+      4
+    ],
     "actionStopEvery": 4,
     "actionStopsDefaultOn": true,
     "showEnglishGlossDefault": false,
@@ -45,17 +57,52 @@
     "traceAttemptsBeforeSkip": 5
   },
   "games": {
-    "beachRounds": 6,
-    "memoryPairs": 6,
-    "huntRounds": 5,
-    "huntBubbles": 9
+    "_doc": "Games tab. Cricket Words: one over = oversBalls words, a match = overs overs. Train Yard sorts letters into wagons; Kolam Trace traces taught letters without the demo.",
+    "overs": 2,
+    "overBalls": 6,
+    "trainYardRounds": 6,
+    "kolamLetters": 3
+  },
+  "reading": {
+    "blendWordsPerLesson": 5
+  },
+  "onboarding": {
+    "_doc": "First-run setup. exposurePriorScale multiplies each word's starting prior (homeFrequency) by how often he hears Tamil; it seeds progress entries with n = 0, so the scoring model itself is unchanged.",
+    "exposurePriorScale": {
+      "daily": 1.0,
+      "sometimes": 0.7,
+      "rarely": 0.4
+    },
+    "checkWords": 10,
+    "checkChoices": 4,
+    "voiceSetupWords": 8
+  },
+  "yard": {
+    "_doc": "Wagon yard rewards: a new engine colour every tripsPerColour trips.",
+    "tripsPerColour": 10,
+    "engineColours": [
+      "#F2546B",
+      "#5B4FE0",
+      "#11A7A3",
+      "#FFB627",
+      "#3DBE6E"
+    ]
   },
   "unlocks": {
-    "lettersLine": { "knownWords": 30 },
-    "readingLine": { "knownLetters": 12 }
+    "lettersLine": {
+      "knownWords": 30
+    },
+    "readingLine": {
+      "knownLetters": 12
+    }
   },
   "navigation": {
-    "tabs": ["trip", "map", "games", "grownups"],
+    "tabs": [
+      "trip",
+      "map",
+      "games",
+      "grownups"
+    ],
     "hideTabsDuringSession": true,
     "holdToExitMs": 1000,
     "grownupsGate": "math-word-problem"

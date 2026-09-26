@@ -3,8 +3,8 @@ import { Pressable, Text, View, type ViewStyle } from 'react-native';
 import { C, F, MIN_TOUCH, R, drop } from '../theme';
 import { content } from '../generated/content';
 
-export function ChunkyButton({ label, onPress, color = C.indigo, under = C.indigoDeep, disabled, style }:
-  { label: string; onPress: () => void; color?: string; under?: string; disabled?: boolean; style?: ViewStyle }) {
+export function ChunkyButton({ label, onPress, color = C.indigo, under = C.indigoDeep, disabled, style, textColor }:
+  { label: string; onPress: () => void; color?: string; under?: string; disabled?: boolean; style?: ViewStyle; textColor?: string }) {
   return (
     <Pressable
       onPress={onPress}
@@ -16,7 +16,7 @@ export function ChunkyButton({ label, onPress, color = C.indigo, under = C.indig
         ...drop(disabled ? 'transparent' : under, pressed ? 1 : 4),
       }, style]}
     >
-      <Text style={{ fontFamily: F.heavy, fontSize: 17, color: '#FFFFFF' }}>{label}</Text>
+      <Text style={{ fontFamily: F.heavy, fontSize: 17, color: textColor ?? (color === '#FFFFFF' ? C.ink : '#FFFFFF') }}>{label}</Text>
     </Pressable>
   );
 }

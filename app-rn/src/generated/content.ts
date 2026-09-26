@@ -602,10 +602,36 @@ export const content: ContentBundle = {
       "traceAttemptsBeforeSkip": 5
     },
     "games": {
-      "beachRounds": 6,
-      "memoryPairs": 6,
-      "huntRounds": 5,
-      "huntBubbles": 9
+      "_doc": "Games tab. Cricket Words: one over = oversBalls words, a match = overs overs. Train Yard sorts letters into wagons; Kolam Trace traces taught letters without the demo.",
+      "overs": 2,
+      "overBalls": 6,
+      "trainYardRounds": 6,
+      "kolamLetters": 3
+    },
+    "reading": {
+      "blendWordsPerLesson": 5
+    },
+    "onboarding": {
+      "_doc": "First-run setup. exposurePriorScale multiplies each word's starting prior (homeFrequency) by how often he hears Tamil; it seeds progress entries with n = 0, so the scoring model itself is unchanged.",
+      "exposurePriorScale": {
+        "daily": 1.0,
+        "sometimes": 0.7,
+        "rarely": 0.4
+      },
+      "checkWords": 10,
+      "checkChoices": 4,
+      "voiceSetupWords": 8
+    },
+    "yard": {
+      "_doc": "Wagon yard rewards: a new engine colour every tripsPerColour trips.",
+      "tripsPerColour": 10,
+      "engineColours": [
+        "#F2546B",
+        "#5B4FE0",
+        "#11A7A3",
+        "#FFB627",
+        "#3DBE6E"
+      ]
     },
     "unlocks": {
       "lettersLine": {
@@ -629,7 +655,7 @@ export const content: ContentBundle = {
   },
   "curriculum": {
     "version": 1,
-    "_doc": "Three lines on the map. soundWords (3 written words starting with the letter, anchor first) feed Mayil's sound story and Kili's song. Letter order is a PROPOSAL (common, visually distinct, cast-anchored letters first) - review with a Tamil teacher before shipping. 'anchor' is the word/character that introduces the sound.",
+    "_doc": "Three lines on the map. soundWords (3 written words starting with the letter, anchor first) feed Mayil's sound story and Kili's song; soundStory is a silly spoken-Tamil sentence the grown-up reads (review wording with a Tamil speaker). Letter order is a PROPOSAL (common, visually distinct, cast-anchored letters first) - review with a Tamil teacher before shipping. 'anchor' is the word/character that introduces the sound.",
     "lines": [
       {
         "id": "listening",
@@ -699,7 +725,11 @@ export const content: ContentBundle = {
                 "en": "father",
                 "emoji": "👨"
               }
-            ]
+            ],
+            "soundStory": {
+              "ta": "அணில் அம்மா அப்பா கூட ஓடுச்சு!",
+              "en": "The squirrel ran with Amma and Appa!"
+            }
           },
           {
             "n": 2,
@@ -726,7 +756,11 @@ export const content: ContentBundle = {
                 "en": "apple",
                 "emoji": "🍎"
               }
-            ]
+            ],
+            "soundStory": {
+              "ta": "ஆமை ஆடு மேல ஆப்பிள் வெச்சுச்சு!",
+              "en": "The turtle put an apple on the goat!"
+            }
           },
           {
             "n": 3,
@@ -753,7 +787,11 @@ export const content: ContentBundle = {
                 "en": "heart",
                 "emoji": "❤️"
               }
-            ]
+            ],
+            "soundStory": {
+              "ta": "இறால் இலை மேல இதயம் வரைஞ்சுச்சு!",
+              "en": "The prawn drew a heart on a leaf!"
+            }
           },
           {
             "n": 4,
@@ -780,7 +818,11 @@ export const content: ContentBundle = {
                 "en": "mango",
                 "emoji": "🥭"
               }
-            ]
+            ],
+            "soundStory": {
+              "ta": "மயில் மரத்துல மாம்பழம் சாப்பிட்டுச்சு!",
+              "en": "The peacock ate a mango in the tree!"
+            }
           },
           {
             "n": 5,
@@ -807,7 +849,11 @@ export const content: ContentBundle = {
                 "en": "flower",
                 "emoji": "🌸"
               }
-            ]
+            ],
+            "soundStory": {
+              "ta": "பந்து பால்ல விழுந்து பூ மேல பறந்துச்சு!",
+              "en": "The ball fell in the milk and flew onto a flower!"
+            }
           },
           {
             "n": 6,
@@ -834,7 +880,11 @@ export const content: ContentBundle = {
                 "en": "hand",
                 "emoji": "✋"
               }
-            ]
+            ],
+            "soundStory": {
+              "ta": "கிளி கார் ஓட்டிக்கிட்டே கை ஆட்டுச்சு!",
+              "en": "The parrot waved its hand while driving the car!"
+            }
           },
           {
             "n": 7,
@@ -861,7 +911,11 @@ export const content: ContentBundle = {
                 "en": "moon",
                 "emoji": "🌙"
               }
-            ]
+            ],
+            "soundStory": {
+              "ta": "நண்டு நாய் கூட நிலாவுக்கு போச்சு!",
+              "en": "The crab went to the moon with the dog!"
+            }
           },
           {
             "n": 8,
@@ -888,7 +942,11 @@ export const content: ContentBundle = {
                 "en": "drum",
                 "emoji": "🥁"
               }
-            ]
+            ],
+            "soundStory": {
+              "ta": "டப்பாவுல டம்ளர், டிரம் டம் டம்!",
+              "en": "A tumbler in the tin, the drum goes dum dum!"
+            }
           },
           {
             "n": 9,
@@ -915,7 +973,11 @@ export const content: ContentBundle = {
                 "en": "tomato",
                 "emoji": "🍅"
               }
-            ]
+            ],
+            "soundStory": {
+              "ta": "தாத்தா தக்காளியை தண்ணீர்ல கழுவினாரு!",
+              "en": "Thaatha washed the tomato in water!"
+            }
           },
           {
             "n": 10,
@@ -942,7 +1004,11 @@ export const content: ContentBundle = {
                 "en": "potato",
                 "emoji": "🥔"
               }
-            ]
+            ],
+            "soundStory": {
+              "ta": "உருளைக்கிழங்கு உப்பு போட்டு உடை மாத்துச்சு!",
+              "en": "The potato added salt and changed its dress!"
+            }
           },
           {
             "n": 11,
@@ -969,7 +1035,11 @@ export const content: ContentBundle = {
                 "en": "house",
                 "emoji": "🏠"
               }
-            ]
+            ],
+            "soundStory": {
+              "ta": "வாத்து வீட்டுல வாழைப்பழம் சாப்பிட்டுச்சு!",
+              "en": "The duck ate a banana at home!"
+            }
           },
           {
             "n": 12,
@@ -996,7 +1066,11 @@ export const content: ContentBundle = {
                 "en": "light",
                 "emoji": "💡"
               }
-            ]
+            ],
+            "soundStory": {
+              "ta": "லாரி நிறைய லட்டு, லைட் போட்டு வருது!",
+              "en": "A lorry full of laddus comes with its lights on!"
+            }
           }
         ]
       },
@@ -1028,13 +1102,17 @@ export const content: ContentBundle = {
         {
           "id": "paatti",
           "ta": "பாட்டி"
+        },
+        {
+          "id": "thaatha",
+          "ta": "தாத்தா"
         }
       ]
     }
   },
   "reading": {
     "version": 1,
-    "_doc": "Reading Line (written register). Every word and book line must decode with only the Letters Line letters (vowels give their signs: ஆ -> ா, இ -> ி, உ -> ு; no pulli yet). app-rn/src/core/__tests__/reading.test.ts enforces it. Books are meant to be reread: short, repetitive, one picture per page.",
+    "_doc": "Reading Line (written register). Every word and book line must decode with only the Letters Line letters (vowels give their signs: ஆ -> ா, இ -> ி, உ -> ு; no pulli yet). app-rn/src/core/__tests__/reading.test.ts enforces it. Books are meant to be reread: short, repetitive, one picture per page. Each page has an \"ask\": a question the grown-up asks after the page, in spoken Tamil (talk is spoken, books are written).",
     "words": [
       {
         "id": "maamaa",
@@ -1159,27 +1237,47 @@ export const content: ContentBundle = {
           {
             "ta": "இது மாடு.",
             "en": "This is a cow.",
-            "art": "🐄"
+            "art": "🐄",
+            "ask": {
+              "ta": "இது என்ன?",
+              "en": "What is this?"
+            }
           },
           {
             "ta": "இது ஆடு.",
             "en": "This is a goat.",
-            "art": "🐐"
+            "art": "🐐",
+            "ask": {
+              "ta": "ஆடு என்ன சொல்லும்?",
+              "en": "What does a goat say?"
+            }
           },
           {
             "ta": "இது படகு.",
             "en": "This is a boat.",
-            "art": "⛵"
+            "art": "⛵",
+            "ask": {
+              "ta": "படகு எங்க போகும்?",
+              "en": "Where does a boat go?"
+            }
           },
           {
             "ta": "அது புலி!",
             "en": "That is a tiger!",
-            "art": "🐅"
+            "art": "🐅",
+            "ask": {
+              "ta": "புலி பெருசா, சின்னதா?",
+              "en": "Is the tiger big or small?"
+            }
           },
           {
             "ta": "புலி, வா!",
             "en": "Tiger, come!",
-            "art": "🐅👋"
+            "art": "🐅👋",
+            "ask": {
+              "ta": "புலி வந்தா என்ன பண்ணுவ?",
+              "en": "What would you do if the tiger came?"
+            }
           }
         ]
       },
@@ -1192,27 +1290,47 @@ export const content: ContentBundle = {
           {
             "ta": "மாமா, வா!",
             "en": "Uncle, come!",
-            "art": "👨👋"
+            "art": "👨👋",
+            "ask": {
+              "ta": "மாமா யாரு?",
+              "en": "Who is Maamaa?"
+            }
           },
           {
             "ta": "மாமா, பாடு!",
             "en": "Uncle, sing!",
-            "art": "👨🎤"
+            "art": "👨🎤",
+            "ask": {
+              "ta": "நீயும் பாடுவியா?",
+              "en": "Will you sing too?"
+            }
           },
           {
             "ta": "மாமா, குதி!",
             "en": "Uncle, jump!",
-            "art": "👨🦘"
+            "art": "👨🦘",
+            "ask": {
+              "ta": "நீ எவ்ளோ உயரம் குதிப்ப?",
+              "en": "How high can you jump?"
+            }
           },
           {
             "ta": "மாமா, படு!",
             "en": "Uncle, lie down!",
-            "art": "👨😴"
+            "art": "👨😴",
+            "ask": {
+              "ta": "மாமா ஏன் படுத்தாரு?",
+              "en": "Why did Maamaa lie down?"
+            }
           },
           {
             "ta": "மாமா, படி!",
             "en": "Uncle, read!",
-            "art": "👨📖"
+            "art": "👨📖",
+            "ask": {
+              "ta": "உனக்கு என்ன புத்தகம் பிடிக்கும்?",
+              "en": "Which book do you like?"
+            }
           }
         ]
       },
@@ -1225,27 +1343,47 @@ export const content: ContentBundle = {
           {
             "ta": "இது காடு.",
             "en": "This is the forest.",
-            "art": "🌳🌳"
+            "art": "🌳🌳",
+            "ask": {
+              "ta": "காட்டுல என்ன இருக்கு?",
+              "en": "What is in the forest?"
+            }
           },
           {
             "ta": "அது புலி.",
             "en": "That is a tiger.",
-            "art": "🐅"
+            "art": "🐅",
+            "ask": {
+              "ta": "புலி என்ன கலர்?",
+              "en": "What colour is the tiger?"
+            }
           },
           {
             "ta": "புலி, குதி!",
             "en": "Tiger, jump!",
-            "art": "🐅🦘"
+            "art": "🐅🦘",
+            "ask": {
+              "ta": "நீயும் குதிச்சு காட்டு!",
+              "en": "Show me your jump!"
+            }
           },
           {
             "ta": "புலி, குடி!",
             "en": "Tiger, drink!",
-            "art": "🐅💧"
+            "art": "🐅💧",
+            "ask": {
+              "ta": "புலி என்ன குடிக்குது?",
+              "en": "What is the tiger drinking?"
+            }
           },
           {
             "ta": "புலி, படு!",
             "en": "Tiger, lie down!",
-            "art": "🐅😴"
+            "art": "🐅😴",
+            "ask": {
+              "ta": "புலி தூங்குதா?",
+              "en": "Is the tiger sleeping?"
+            }
           }
         ]
       }

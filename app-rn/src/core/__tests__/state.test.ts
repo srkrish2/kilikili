@@ -17,7 +17,7 @@ describe('saved state', () => {
   });
 
   it('round-trips through export and import', () => {
-    const s = { ...defaultState(rules), onboarded: true, profile: { childName: 'Chinmay', age: 4, speakers: ['amma'] } };
+    const s = { ...defaultState(rules), onboarded: true, profile: { childName: 'Chinmay', age: 4, exposure: 'daily' as const, speakers: ['amma'] } };
     expect(importState(exportState(s), rules)).toEqual(s);
   });
 

@@ -26,6 +26,7 @@ export default function RootLayout() {
         <Stack screenOptions={{ headerShown: false, contentStyle: { backgroundColor: C.jasmine } }}>
           <Stack.Screen name="(tabs)" />
           <Stack.Screen name="trip" options={SESSION} />
+          <Stack.Screen name="lesson/[n]" options={SESSION} />
           <Stack.Screen name="done" options={{ ...SESSION, animation: 'slide_from_bottom' }} />
         </Stack>
       </AppStateProvider>
