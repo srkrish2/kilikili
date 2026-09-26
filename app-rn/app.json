@@ -1,0 +1,28 @@
+{
+  "expo": {
+    "name": "Tamil Train",
+    "slug": "tamil-train",
+    "version": "1.0.0",
+    "orientation": "default",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "light",
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.sarathy.tamiltrain.rn"
+    },
+    "android": {
+      "adaptiveIcon": {
+        "backgroundColor": "#FFF8EC",
+        "foregroundImage": "./assets/android-icon-foreground.png",
+        "backgroundImage": "./assets/android-icon-background.png",
+        "monochromeImage": "./assets/android-icon-monochrome.png"
+      },
+      "predictiveBackGestureEnabled": false,
+      "package": "com.sarathy.tamiltrain"
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    },
+    "backgroundColor": "#FFF8EC"
+  }
+}

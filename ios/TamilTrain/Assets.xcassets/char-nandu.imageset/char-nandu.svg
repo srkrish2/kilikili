@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" aria-label="Nandu the crab">
+  <ellipse cx="100" cy="186" rx="72" ry="6" fill="#23204A" opacity="0.08"/>
+  <path d="M50 140l-22 10M52 154l-18 16M150 140l22 10M148 154l18 16" stroke="#E8553F" stroke-width="8" stroke-linecap="round"/>
+  <path d="M52 124C36 112 30 96 34 80M148 124C164 112 170 96 166 80" stroke="#FF6F59" stroke-width="11" fill="none" stroke-linecap="round"/>
+  <circle cx="34" cy="66" r="17" fill="#FF6F59"/><circle cx="21" cy="52" r="9" fill="#E8553F"/>
+  <circle cx="166" cy="66" r="17" fill="#FF6F59"/><circle cx="179" cy="52" r="9" fill="#E8553F"/>
+  <rect x="80" y="78" width="7" height="30" rx="3.5" fill="#FF6F59"/><rect x="113" y="78" width="7" height="30" rx="3.5" fill="#FF6F59"/>
+  <ellipse cx="100" cy="134" rx="60" ry="40" fill="#FF6F59"/>
+  <ellipse cx="100" cy="150" rx="38" ry="16" fill="#FF9A85"/>
+  <circle cx="83.5" cy="72" r="13" fill="#FFFFFF"/><circle cx="116.5" cy="72" r="13" fill="#FFFFFF"/>
+  <circle cx="86.5" cy="74" r="6.5" fill="#23204A"/><circle cx="113.5" cy="74" r="6.5" fill="#23204A"/>
+  <circle cx="88.5" cy="72" r="2" fill="#FFFFFF"/><circle cx="115.5" cy="72" r="2" fill="#FFFFFF"/>
+  <ellipse cx="70" cy="130" rx="7" ry="4.5" fill="#FFC2CE" opacity="0.9"/><ellipse cx="130" cy="130" rx="7" ry="4.5" fill="#FFC2CE" opacity="0.9"/>
+  <path d="M90 124q10 8 20 0" stroke="#23204A" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+</svg>

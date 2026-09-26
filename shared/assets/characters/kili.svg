@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" aria-label="Kili the parrot">
+  <ellipse cx="100" cy="193" rx="56" ry="5" fill="#23204A" opacity="0.08"/>
+  <path d="M92 156L82 198H100L108 156Z" fill="#1F8A4C"/>
+  <ellipse cx="100" cy="110" rx="50" ry="60" fill="#3DBE6E"/>
+  <ellipse cx="100" cy="132" rx="31" ry="38" fill="#86E3A2"/>
+  <path d="M54 104C44 148 74 172 98 168C80 148 72 124 54 104Z" fill="#27A158"/>
+  <path d="M146 104C156 148 126 172 102 168C120 148 128 124 146 104Z" fill="#27A158"/>
+  <path d="M90 56C92 34 110 32 112 54Z" fill="#3DBE6E"/>
+  <path d="M66 124C86 138 114 138 134 124" stroke="#FF9EC0" stroke-width="5" fill="none" stroke-linecap="round"/>
+  <ellipse cx="68" cy="104" rx="7" ry="4.5" fill="#FF8FA3" opacity="0.85"/><ellipse cx="132" cy="104" rx="7" ry="4.5" fill="#FF8FA3" opacity="0.85"/>
+  <ellipse cx="82" cy="88" rx="10" ry="11.5" fill="#FFFFFF"/><ellipse cx="118" cy="88" rx="10" ry="11.5" fill="#FFFFFF"/>
+  <circle cx="85" cy="90" r="5.5" fill="#23204A"/><circle cx="115" cy="90" r="5.5" fill="#23204A"/>
+  <circle cx="87" cy="88" r="1.8" fill="#FFFFFF"/><circle cx="117" cy="88" r="1.8" fill="#FFFFFF"/>
+  <path d="M90 100C96 94 104 94 110 100C108 112 104 118 100 120C96 118 92 112 90 100Z" fill="#F2546B"/>
+  <path d="M88 168v14M112 168v14" stroke="#FFB627" stroke-width="6" stroke-linecap="round"/>
+</svg>

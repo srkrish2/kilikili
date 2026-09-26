@@ -1,0 +1,42 @@
+name: ci
+on: [push, pull_request]
+
+jobs:
+  shared-and-rn:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.12" }
+      - name: Generated files and scoring vectors are up to date
+        run: |
+          python3 tools/sync.py --check
+          python3 tools/scoring_reference.py --check
+      - uses: actions/setup-node@v4
+        with: { node-version: 22, cache: npm, cache-dependency-path: app-rn/package-lock.json }
+      - run: npm ci
+        working-directory: app-rn
+      - run: npx tsc --noEmit && npx vitest run
+        working-directory: app-rn
+
+  swift-core:
+    runs-on: macos-15
+    steps:
+      - uses: actions/checkout@v4
+      - run: swift test
+        working-directory: ios/TamilTrainCore
+
+  # Compiles the SwiftUI app on a real Mac. Cloud Claude sessions run on Linux and can't
+  # build iOS, so this job is how they get compiler feedback (turn on Auto-fix on the PR).
+  ios-app-build:
+    runs-on: macos-15
+    steps:
+      - uses: actions/checkout@v4
+      - run: brew install xcodegen
+      - run: xcodegen
+        working-directory: ios
+      - run: |
+          xcodebuild build \
+            -project ios/TamilTrain.xcodeproj -scheme TamilTrain \
+            -destination 'generic/platform=iOS Simulator' \
+            CODE_SIGNING_ALLOWED=NO -quiet

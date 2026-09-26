@@ -1,0 +1,47 @@
+{
+  "version": 1,
+  "_doc": "Tunable rules shared by every platform. Change numbers here, never hard-code them in app code. See docs/scoring.md.",
+  "scoring": {
+    "priorByHomeFrequency": { "3": 0.6, "2": 0.35, "1": 0.15 },
+    "slip": 0.1,
+    "learnRate": 0.03,
+    "actionGuess": 0.25,
+    "knownThreshold": 0.9,
+    "knownMinDistinctDays": 2,
+    "emergingThreshold": 0.5,
+    "maxTrackedDays": 12
+  },
+  "picker": {
+    "warmupStops": 2,
+    "warmupChance": 0.2,
+    "warmupPoolSize": 4,
+    "gapWeight": 0.04,
+    "maxGapDays": 3,
+    "jitter": 0.03
+  },
+  "trip": {
+    "defaultLength": 8,
+    "lengthOptions": [6, 8, 10],
+    "defaultChoices": 3,
+    "choiceOptions": [2, 3, 4],
+    "actionStopEvery": 4,
+    "actionStopsDefaultOn": true,
+    "showEnglishGlossDefault": false,
+    "advanceDelayMs": 1300,
+    "actionAdvanceDelayMs": 1500
+  },
+  "daily": {
+    "tripsPerDay": 1,
+    "gameMinutesPerDay": 10
+  },
+  "unlocks": {
+    "lettersLine": { "knownWords": 30 },
+    "readingLine": { "knownLetters": 12 }
+  },
+  "navigation": {
+    "tabs": ["trip", "map", "games", "grownups"],
+    "hideTabsDuringSession": true,
+    "holdToExitMs": 1000,
+    "grownupsGate": "math-word-problem"
+  }
+}

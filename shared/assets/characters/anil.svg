@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" aria-label="Anil the squirrel">
+  <ellipse cx="100" cy="192" rx="72" ry="6" fill="#23204A" opacity="0.08"/>
+  <path d="M118 176C176 176 196 120 184 80C172 40 128 30 118 60C110 84 140 92 150 80C160 110 150 150 118 150Z" fill="#D98A4E"/>
+  <path d="M152 84C164 114 156 146 128 158" stroke="#F2C79B" stroke-width="7" fill="none" stroke-linecap="round"/>
+  <ellipse cx="90" cy="138" rx="44" ry="48" fill="#E9A66B"/>
+  <ellipse cx="90" cy="148" rx="27" ry="34" fill="#FFE3C2"/>
+  <ellipse cx="64" cy="46" rx="11" ry="17" fill="#E9A66B"/><ellipse cx="64" cy="49" rx="5" ry="9" fill="#F7A99A"/>
+  <ellipse cx="116" cy="46" rx="11" ry="17" fill="#E9A66B"/><ellipse cx="116" cy="49" rx="5" ry="9" fill="#F7A99A"/>
+  <circle cx="90" cy="80" r="40" fill="#E9A66B"/>
+  <path d="M80 44v20M90 41v24M100 44v20" stroke="#FFF1DC" stroke-width="5" stroke-linecap="round"/>
+  <ellipse cx="64" cy="99" rx="7" ry="4.5" fill="#FF8FA3" opacity="0.8"/><ellipse cx="116" cy="99" rx="7" ry="4.5" fill="#FF8FA3" opacity="0.8"/>
+  <ellipse cx="75" cy="82" rx="9.5" ry="11" fill="#FFFFFF"/><ellipse cx="105" cy="82" rx="9.5" ry="11" fill="#FFFFFF"/>
+  <circle cx="78" cy="84" r="5.5" fill="#23204A"/><circle cx="102" cy="84" r="5.5" fill="#23204A"/>
+  <circle cx="80" cy="82" r="1.8" fill="#FFFFFF"/><circle cx="104" cy="82" r="1.8" fill="#FFFFFF"/>
+  <ellipse cx="90" cy="97" rx="4.5" ry="3.2" fill="#23204A"/>
+  <path d="M84 104q6 5 12 0" stroke="#23204A" stroke-width="3" fill="none" stroke-linecap="round"/>
+  <ellipse cx="76" cy="128" rx="9" ry="7" fill="#D98A4E"/><ellipse cx="104" cy="128" rx="9" ry="7" fill="#D98A4E"/>
+  <ellipse cx="70" cy="184" rx="15" ry="7" fill="#D98A4E"/><ellipse cx="110" cy="184" rx="15" ry="7" fill="#D98A4E"/>
+</svg>

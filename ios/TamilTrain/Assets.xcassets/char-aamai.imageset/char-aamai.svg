@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" aria-label="Aamai the turtle">
+  <ellipse cx="96" cy="178" rx="84" ry="6" fill="#23204A" opacity="0.08"/>
+  <path d="M16 152L2 160L16 162Z" fill="#8ED98A"/>
+  <ellipse cx="40" cy="166" rx="15" ry="9" fill="#8ED98A"/><ellipse cx="124" cy="166" rx="15" ry="9" fill="#8ED98A"/>
+  <rect x="136" y="128" width="34" height="22" rx="11" fill="#8ED98A"/>
+  <path d="M16 156A68 60 0 0 1 152 156Z" fill="#2FB58A"/>
+  <ellipse cx="84" cy="120" rx="21" ry="16" fill="#5BD6A8"/>
+  <ellipse cx="48" cy="138" rx="12" ry="11" fill="#5BD6A8"/><ellipse cx="120" cy="138" rx="12" ry="11" fill="#5BD6A8"/>
+  <rect x="10" y="150" width="148" height="13" rx="6.5" fill="#FFB627"/>
+  <circle cx="168" cy="124" r="26" fill="#8ED98A"/>
+  <ellipse cx="151" cy="132" rx="5" ry="3.2" fill="#FF8FA3" opacity="0.85"/><ellipse cx="187" cy="132" rx="5" ry="3.2" fill="#FF8FA3" opacity="0.85"/>
+  <ellipse cx="159" cy="117" rx="7.5" ry="9" fill="#FFFFFF"/><ellipse cx="179" cy="117" rx="7.5" ry="9" fill="#FFFFFF"/>
+  <circle cx="162" cy="119" r="4.5" fill="#23204A"/><circle cx="182" cy="119" r="4.5" fill="#23204A"/>
+  <circle cx="163.5" cy="117" r="1.5" fill="#FFFFFF"/><circle cx="183.5" cy="117" r="1.5" fill="#FFFFFF"/>
+  <path d="M163 134q7 5 14 0" stroke="#23204A" stroke-width="3" fill="none" stroke-linecap="round"/>
+</svg>

@@ -1,0 +1,34 @@
+{
+  "version": 1,
+  "_doc": "Three lines on the map. Letter order is a PROPOSAL (common, visually distinct, cast-anchored letters first) - review with a Tamil teacher before shipping. 'anchor' is the word/character that introduces the sound.",
+  "lines": [
+    { "id": "listening", "name": { "en": "Listening Line", "ta": "கேட்கும் பாதை" }, "color": "peacock", "register": "spoken",
+      "unlock": null,
+      "description": "Picture stops and action stops. Parent says the word; child taps the picture or does the action." },
+    { "id": "letters", "name": { "en": "Letters Line", "ta": "எழுத்துப் பாதை" }, "color": "marigold", "register": "written",
+      "unlock": { "rule": "lettersLine" },
+      "lessonSteps": ["warmup", "meet", "soundStory", "trace", "find", "saySlowly", "song", "rideHome"],
+      "stepHosts": { "warmup": "anil", "meet": "letterBuddy", "soundStory": "mayil", "trace": null, "find": "nandu", "saySlowly": "aamai", "song": "kili", "rideHome": "koo" },
+      "letters": [
+        { "n": 1,  "glyph": "அ", "sound": "a",   "type": "vowel",     "anchor": { "character": "anil",  "ta": "அணில்" } },
+        { "n": 2,  "glyph": "ஆ", "sound": "aa",  "type": "vowel",     "anchor": { "character": "aamai", "ta": "ஆமை" } },
+        { "n": 3,  "glyph": "இ", "sound": "i",   "type": "vowel",     "anchor": { "word": null, "ta": "இலை" } },
+        { "n": 4,  "glyph": "ம", "sound": "ma",  "type": "consonant", "anchor": { "character": "mayil", "ta": "மயில்" } },
+        { "n": 5,  "glyph": "ப", "sound": "pa",  "type": "consonant", "anchor": { "word": "paal",   "ta": "பால்" } },
+        { "n": 6,  "glyph": "க", "sound": "ka",  "type": "consonant", "anchor": { "character": "kili",  "ta": "கிளி" } },
+        { "n": 7,  "glyph": "ந", "sound": "na",  "type": "consonant", "anchor": { "character": "nandu", "ta": "நண்டு" } },
+        { "n": 8,  "glyph": "ட", "sound": "ṭa",  "type": "consonant", "anchor": { "word": null, "ta": "டப்பா" } },
+        { "n": 9,  "glyph": "த", "sound": "tha", "type": "consonant", "anchor": { "word": "thaatha", "ta": "தாத்தா" } },
+        { "n": 10, "glyph": "உ", "sound": "u",   "type": "vowel",     "anchor": { "word": null, "ta": "உப்பு" } },
+        { "n": 11, "glyph": "வ", "sound": "va",  "type": "consonant", "anchor": { "word": "vaazhai", "ta": "வாழைப்பழம்" } },
+        { "n": 12, "glyph": "ல", "sound": "la",  "type": "consonant", "anchor": { "word": null, "ta": "லட்டு" } }
+      ] },
+    { "id": "reading", "name": { "en": "Reading Line", "ta": "படிக்கும் பாதை" }, "color": "kumkum", "register": "written",
+      "unlock": { "rule": "readingLine" },
+      "description": "Blend two or three known letters into words, then decodable books that reuse only taught letters. Reread is the reward, not a chore." }
+  ],
+  "voices": {
+    "_doc": "Family voice slots. Recordings live on-device at audio/<slot>/<wordId>.m4a. TTS (ta-IN) is a fallback only.",
+    "slots": [ { "id": "amma", "ta": "அம்மா" }, { "id": "appa", "ta": "அப்பா" }, { "id": "paatti", "ta": "பாட்டி" } ]
+  }
+}
