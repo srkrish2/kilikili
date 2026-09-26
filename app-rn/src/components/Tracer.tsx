@@ -39,8 +39,10 @@ const toPoints = (p: [number, number][]) => p.map(([x, y]) => `${x},${y}`).join(
  * with a finger; the trace is scored geometrically (core/letters.ts: scoreTrace).
  * `demoKey` replays the demo when it changes.
  */
-export function Tracer({ glyph, size, demoKey, onResult }: {
+export function Tracer({ glyph, size, demoKey, onResult, autoDemo = true }: {
   glyph: LetterStrokes; size: number; demoKey: number; onResult: (r: TraceResult) => void;
+  /** Kolam Trace skips the pen demo: only the numbered start dots guide him. */
+  autoDemo?: boolean;
 }) {
   const { box, strokes, penWidth } = glyph;
   const pad = Math.max(box.w, box.h) * PAD_RATIO;
@@ -60,6 +62,7 @@ export function Tracer({ glyph, size, demoKey, onResult }: {
   useEffect(() => {
     setInk([]);
     setPassed(false);
+    if (!autoDemo) return;
     let stroke = 0;
     let start: number | null = null;
     const tick = (t: number) => {
@@ -77,7 +80,7 @@ export function Tracer({ glyph, size, demoKey, onResult }: {
     };
     raf.current = requestAnimationFrame(tick);
     return () => { if (raf.current !== null) cancelAnimationFrame(raf.current); };
-  }, [demoKey, strokes]);
+  }, [demoKey, strokes, autoDemo]);
 
   const stopDemo = () => {
     if (raf.current !== null) cancelAnimationFrame(raf.current);
@@ -102,7 +105,7 @@ export function Tracer({ glyph, size, demoKey, onResult }: {
   return (
     <View style={{ alignItems: 'center' }}>
       <View
-        style={{ width, height, borderRadius: R.lg, backgroundColor: '#FFFFFF', ...drop(passed ? C.leaf : C.cardShadow, 6), borderWidth: passed ? 4 : 0, borderColor: C.leaf }}
+        style={{ userSelect: 'none', width, height, borderRadius: R.lg, backgroundColor: '#FFFFFF', ...drop(passed ? C.leaf : C.cardShadow, 6), borderWidth: passed ? 4 : 0, borderColor: C.leaf }}
         onStartShouldSetResponder={() => !passed}
         onMoveShouldSetResponder={() => !passed}
         // Keep the finger even when a parent ScrollView wants to scroll.

@@ -60,7 +60,7 @@
     "_doc": "Games tab. Cricket Words: one over = oversBalls words, a match = overs overs. Train Yard sorts letters into wagons; Kolam Trace traces taught letters without the demo.",
     "overs": 2,
     "overBalls": 6,
-    "trainYardRounds": 6,
+    "trainYardRounds": 3,
     "kolamLetters": 3
   },
   "reading": {

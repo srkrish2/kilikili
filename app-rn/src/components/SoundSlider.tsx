@@ -53,7 +53,7 @@ export function SoundSlider({ parts, onPart, onWhole, color = C.peacock }: {
 
   return (
     <View
-      style={{ alignItems: 'center', paddingVertical: 8, gap: 10 }}
+      style={{ alignItems: 'center', paddingVertical: 8, gap: 10, userSelect: 'none' }}
       onStartShouldSetResponder={() => true}
       onMoveShouldSetResponder={() => true}
       onResponderTerminationRequest={() => false}
@@ -73,7 +73,7 @@ export function SoundSlider({ parts, onPart, onWhole, color = C.peacock }: {
           const s = state(i);
           return (
             <View key={i} onLayout={layoutPart(i)} style={{ paddingHorizontal: 4, borderRadius: R.sm, backgroundColor: s === 'focus' ? '#FFFFFF' : 'transparent', ...(s === 'focus' ? drop(C.cardShadow, 3) : {}), transform: [{ scale: s === 'focus' ? 1.15 : 1 }] }}>
-              <Text style={{ fontFamily: F.heavy, fontSize: 64, lineHeight: 84, color: s === 'focus' || s === 'lit' ? color : C.ink, opacity: s === 'dim' ? 0.2 : 1 }}>{p}</Text>
+              <Text selectable={false} style={{ fontFamily: F.heavy, fontSize: 64, lineHeight: 84, color: s === 'focus' || s === 'lit' ? color : C.ink, opacity: s === 'dim' ? 0.2 : 1 }}>{p}</Text>
             </View>
           );
         })}
