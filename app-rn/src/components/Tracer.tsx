@@ -3,7 +3,7 @@ import { Text, View, type GestureResponderEvent } from 'react-native';
 import Svg, { Circle, G, Path, Polyline, Text as SvgText } from 'react-native-svg';
 import { scoreTrace, type LetterStrokes, type Pt, type TraceResult } from '../core';
 import { content } from '../generated/content';
-import { C, F, R, drop } from '../theme';
+import { C, F, NO_SELECT, R, drop } from '../theme';
 
 const PAD_RATIO = 0.12;
 const DEMO_SPEED = 900; // font units per second
@@ -105,7 +105,7 @@ export function Tracer({ glyph, size, demoKey, onResult, autoDemo = true }: {
   return (
     <View style={{ alignItems: 'center' }}>
       <View
-        style={{ userSelect: 'none', width, height, borderRadius: R.lg, backgroundColor: '#FFFFFF', ...drop(passed ? C.leaf : C.cardShadow, 6), borderWidth: passed ? 4 : 0, borderColor: C.leaf }}
+        style={{ ...NO_SELECT, width, height, borderRadius: R.lg, backgroundColor: '#FFFFFF', ...drop(passed ? C.leaf : C.cardShadow, 6), borderWidth: passed ? 4 : 0, borderColor: C.leaf }}
         onStartShouldSetResponder={() => !passed}
         onMoveShouldSetResponder={() => !passed}
         // Keep the finger even when a parent ScrollView wants to scroll.

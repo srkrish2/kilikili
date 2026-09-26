@@ -1,6 +1,6 @@
 import { useRef, useState } from 'react';
 import { Text, View, type GestureResponderEvent, type LayoutChangeEvent } from 'react-native';
-import { C, F, R, drop } from '../theme';
+import { C, F, NO_SELECT, R, drop } from '../theme';
 import { Art } from './Art';
 
 const KNOB = 64;
@@ -53,7 +53,7 @@ export function SoundSlider({ parts, onPart, onWhole, color = C.peacock }: {
 
   return (
     <View
-      style={{ alignItems: 'center', paddingVertical: 8, gap: 10, userSelect: 'none' }}
+      style={{ alignItems: 'center', paddingVertical: 8, gap: 10, ...NO_SELECT }}
       onStartShouldSetResponder={() => true}
       onMoveShouldSetResponder={() => true}
       onResponderTerminationRequest={() => false}

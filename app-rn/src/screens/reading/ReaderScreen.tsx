@@ -6,7 +6,7 @@ import { Script, SessionShell } from '../../components/Session';
 import { blendParts, pageWords, type Book } from '../../core';
 import { content } from '../../generated/content';
 import { useApp } from '../../state/AppState';
-import { C, F, R, drop } from '../../theme';
+import { C, F, NO_SELECT, R, drop } from '../../theme';
 
 export function ReaderScreen() {
   const { id } = useLocalSearchParams<{ id: string }>();
@@ -61,7 +61,7 @@ function Reader({ book }: { book: Book }) {
             onResponderTerminationRequest={() => false}
             onResponderMove={(e) => setScratched((d) => d + Math.abs(e.nativeEvent.locationX % 7) + 4)}
             accessibilityLabel="Scratch to see the picture"
-            style={{ userSelect: 'none', position: 'absolute', left: 0, top: 0, bottom: 0, width: '60%', backgroundColor: C.cardShadow, opacity: cover, alignItems: 'center', justifyContent: 'center', borderRightWidth: 3, borderStyle: 'dashed', borderColor: C.inkMuted }}>
+            style={{ ...NO_SELECT, position: 'absolute', left: 0, top: 0, bottom: 0, width: '60%', backgroundColor: C.cardShadow, opacity: cover, alignItems: 'center', justifyContent: 'center', borderRightWidth: 3, borderStyle: 'dashed', borderColor: C.inkMuted }}>
             <View style={{ backgroundColor: '#FFFFFF', borderRadius: R.pill, paddingHorizontal: 14, paddingVertical: 4 }}>
               <Text selectable={false} style={{ fontFamily: F.heavy, fontSize: 15, color: C.ink }}>Scratch to see!</Text>
             </View>

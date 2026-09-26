@@ -1,3 +1,4 @@
+import { Platform, type ViewStyle } from 'react-native';
 import { tokens } from './generated/tokens';
 
 export const C = tokens.color;
@@ -23,3 +24,6 @@ export const drop = (color: string, height: number = tokens.shadow.cardDrop) => 
   elevation: 0,
   borderBottomWidth: 0,
 });
+
+/** Web only: stop drags (tracing, sliding, scratching) from selecting text. */
+export const NO_SELECT: ViewStyle = Platform.OS === 'web' ? ({ userSelect: 'none' } as unknown as ViewStyle) : {};
