@@ -1,21 +1,29 @@
+import { router } from 'expo-router';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { Pressable, Text, View, useWindowDimensions } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Art, WordPicture } from '../components/Art';
 import { ChunkyButton, HoldToExit } from '../components/Buttons';
-import { advance, grownUpSaid, reportAction, skipStop, startTrip, tapPicture, type SavedState, type TripDeps, type TripState, type WordProgress } from '../core';
+import { advance, grownUpSaid, reportAction, skipStop, startTrip, tapPicture, type TripDeps, type TripState } from '../core';
 import { content } from '../generated/content';
+import { useApp } from '../state/AppState';
 import { C, F, R, drop } from '../theme';
 
 const CHEERS = ['சபாஷ்!', 'சூப்பர்!', 'கரெக்ட்!', 'அருமை!'];
 
-export function TripScreen({ state, getProgress, saveProgress, onDone, onExit }: {
-  state: SavedState;
-  getProgress: () => Record<string, WordProgress>;
-  saveProgress: (id: string, p: WordProgress) => void;
-  onDone: (trip: TripState) => void;
-  onExit: () => void;
-}) {
+export function TripScreen() {
+  const { state, getProgress, saveProgress, finishSession } = useApp();
+  const onExit = () => router.back();
+  const onDone = (trip: TripState) => {
+    const { stats } = trip;
+    let line = `${stats.firstTry} of ${stats.pictureStops} picture stops right on the first tap`;
+    if (stats.actionStops) line += `; ${stats.didAction} of ${stats.actionStops} actions without a demo`;
+    finishSession(
+      { kind: 'trip', right: stats.firstTry + stats.didAction, of: stats.pictureStops + stats.actionStops },
+      { kind: 'trip', title: 'சூப்பர்!', subtitle: "Koo's wagons are full.", cargo: trip.cargo.map((id, i) => ({ key: `${id}-${i}`, wordId: id })), grownupLine: line },
+    );
+    router.replace('/done');
+  };
   const insets = useSafeAreaInsets();
   const { width } = useWindowDimensions();
   const deps: TripDeps = useMemo(

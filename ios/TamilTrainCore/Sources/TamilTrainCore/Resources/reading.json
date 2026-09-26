@@ -1,0 +1,54 @@
+{
+  "version": 1,
+  "_doc": "Reading Line (written register). Every word and book line must decode with only the Letters Line letters (vowels give their signs: ஆ -> ா, இ -> ி, உ -> ு; no pulli yet). app-rn/src/core/__tests__/reading.test.ts enforces it. Books are meant to be reread: short, repetitive, one picture per page.",
+  "words": [
+    { "id": "maamaa", "ta": "மாமா", "translit": "maamaa", "en": "uncle", "emoji": "👨" },
+    { "id": "kaadhu", "ta": "காது", "translit": "kaadhu", "en": "ear", "emoji": "👂" },
+    { "id": "maadu", "ta": "மாடு", "translit": "maadu", "en": "cow", "emoji": "🐄" },
+    { "id": "aadu", "ta": "ஆடு", "translit": "aadu", "en": "goat", "emoji": "🐐" },
+    { "id": "kaadu", "ta": "காடு", "translit": "kaadu", "en": "forest", "emoji": "🌳" },
+    { "id": "padagu", "ta": "படகு", "translit": "padagu", "en": "boat", "emoji": "⛵" },
+    { "id": "puli", "ta": "புலி", "translit": "puli", "en": "tiger", "emoji": "🐅" },
+    { "id": "thaadi", "ta": "தாடி", "translit": "thaadi", "en": "beard", "emoji": "🧔" },
+    { "id": "kudhi", "ta": "குதி", "translit": "kudhi", "en": "jump", "emoji": "🦘" },
+    { "id": "kudi", "ta": "குடி", "translit": "kudi", "en": "drink", "emoji": "🥤" },
+    { "id": "padu", "ta": "படு", "translit": "padu", "en": "lie down", "emoji": "😴" },
+    { "id": "paadu", "ta": "பாடு", "translit": "paadu", "en": "sing", "emoji": "🎤" },
+    { "id": "vaa", "ta": "வா", "translit": "vaa", "en": "come", "emoji": "👋" },
+    { "id": "padi", "ta": "படி", "translit": "padi", "en": "read", "emoji": "📖" },
+    { "id": "paadhi", "ta": "பாதி", "translit": "paadhi", "en": "half", "emoji": "🌗" },
+    { "id": "naadu", "ta": "நாடு", "translit": "naadu", "en": "country", "emoji": "🗺️" }
+  ],
+  "books": [
+    {
+      "id": "idhu", "title": "இது", "titleEn": "This Is", "cover": "🐄",
+      "pages": [
+        { "ta": "இது மாடு.", "en": "This is a cow.", "art": "🐄" },
+        { "ta": "இது ஆடு.", "en": "This is a goat.", "art": "🐐" },
+        { "ta": "இது படகு.", "en": "This is a boat.", "art": "⛵" },
+        { "ta": "அது புலி!", "en": "That is a tiger!", "art": "🐅" },
+        { "ta": "புலி, வா!", "en": "Tiger, come!", "art": "🐅👋" }
+      ]
+    },
+    {
+      "id": "maamaa", "title": "மாமா", "titleEn": "Uncle", "cover": "👨",
+      "pages": [
+        { "ta": "மாமா, வா!", "en": "Uncle, come!", "art": "👨👋" },
+        { "ta": "மாமா, பாடு!", "en": "Uncle, sing!", "art": "👨🎤" },
+        { "ta": "மாமா, குதி!", "en": "Uncle, jump!", "art": "👨🦘" },
+        { "ta": "மாமா, படு!", "en": "Uncle, lie down!", "art": "👨😴" },
+        { "ta": "மாமா, படி!", "en": "Uncle, read!", "art": "👨📖" }
+      ]
+    },
+    {
+      "id": "kaadu", "title": "காடு", "titleEn": "The Forest", "cover": "🌳",
+      "pages": [
+        { "ta": "இது காடு.", "en": "This is the forest.", "art": "🌳🌳" },
+        { "ta": "அது புலி.", "en": "That is a tiger.", "art": "🐅" },
+        { "ta": "புலி, குதி!", "en": "Tiger, jump!", "art": "🐅🦘" },
+        { "ta": "புலி, குடி!", "en": "Tiger, drink!", "art": "🐅💧" },
+        { "ta": "புலி, படு!", "en": "Tiger, lie down!", "art": "🐅😴" }
+      ]
+    }
+  ]
+}

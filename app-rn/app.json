@@ -21,8 +21,16 @@
       "package": "com.sarathy.tamiltrain"
     },
     "web": {
-      "favicon": "./assets/favicon.png"
+      "favicon": "./assets/favicon.png",
+      "output": "single",
+      "bundler": "metro"
     },
-    "backgroundColor": "#FFF8EC"
+    "backgroundColor": "#FFF8EC",
+    "plugins": [
+      "expo-router",
+      "expo-audio",
+      "expo-sharing"
+    ],
+    "scheme": "tamiltrain"
   }
 }

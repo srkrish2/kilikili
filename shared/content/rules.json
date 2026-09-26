@@ -34,6 +34,22 @@
     "tripsPerDay": 1,
     "gameMinutesPerDay": 10
   },
+  "letters": {
+    "_doc": "Letters Line. Letters use the word-knowledge model (scoring block) with this prior; only Nandu's find rounds are scored (guess = 1/findChoices). Trace thresholds are fractions of the centreline and multiples of the pen width.",
+    "prior": 0.15,
+    "findChoices": 3,
+    "findRounds": 3,
+    "traceCoverage": 0.75,
+    "traceTolerance": 0.9,
+    "traceMaxStray": 0.35,
+    "traceAttemptsBeforeSkip": 5
+  },
+  "games": {
+    "beachRounds": 6,
+    "memoryPairs": 6,
+    "huntRounds": 5,
+    "huntBubbles": 9
+  },
   "unlocks": {
     "lettersLine": { "knownWords": 30 },
     "readingLine": { "knownLetters": 12 }

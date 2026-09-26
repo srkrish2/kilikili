@@ -591,6 +591,22 @@ export const content: ContentBundle = {
       "tripsPerDay": 1,
       "gameMinutesPerDay": 10
     },
+    "letters": {
+      "_doc": "Letters Line. Letters use the word-knowledge model (scoring block) with this prior; only Nandu's find rounds are scored (guess = 1/findChoices). Trace thresholds are fractions of the centreline and multiples of the pen width.",
+      "prior": 0.15,
+      "findChoices": 3,
+      "findRounds": 3,
+      "traceCoverage": 0.75,
+      "traceTolerance": 0.9,
+      "traceMaxStray": 0.35,
+      "traceAttemptsBeforeSkip": 5
+    },
+    "games": {
+      "beachRounds": 6,
+      "memoryPairs": 6,
+      "huntRounds": 5,
+      "huntBubbles": 9
+    },
     "unlocks": {
       "lettersLine": {
         "knownWords": 30
@@ -613,7 +629,7 @@ export const content: ContentBundle = {
   },
   "curriculum": {
     "version": 1,
-    "_doc": "Three lines on the map. Letter order is a PROPOSAL (common, visually distinct, cast-anchored letters first) - review with a Tamil teacher before shipping. 'anchor' is the word/character that introduces the sound.",
+    "_doc": "Three lines on the map. soundWords (3 written words starting with the letter, anchor first) feed Mayil's sound story and Kili's song. Letter order is a PROPOSAL (common, visually distinct, cast-anchored letters first) - review with a Tamil teacher before shipping. 'anchor' is the word/character that introduces the sound.",
     "lines": [
       {
         "id": "listening",
@@ -666,7 +682,24 @@ export const content: ContentBundle = {
             "anchor": {
               "character": "anil",
               "ta": "அணில்"
-            }
+            },
+            "soundWords": [
+              {
+                "ta": "அணில்",
+                "en": "squirrel",
+                "emoji": "🐿️"
+              },
+              {
+                "ta": "அம்மா",
+                "en": "mother",
+                "emoji": "👩"
+              },
+              {
+                "ta": "அப்பா",
+                "en": "father",
+                "emoji": "👨"
+              }
+            ]
           },
           {
             "n": 2,
@@ -676,7 +709,24 @@ export const content: ContentBundle = {
             "anchor": {
               "character": "aamai",
               "ta": "ஆமை"
-            }
+            },
+            "soundWords": [
+              {
+                "ta": "ஆமை",
+                "en": "turtle",
+                "emoji": "🐢"
+              },
+              {
+                "ta": "ஆடு",
+                "en": "goat",
+                "emoji": "🐐"
+              },
+              {
+                "ta": "ஆப்பிள்",
+                "en": "apple",
+                "emoji": "🍎"
+              }
+            ]
           },
           {
             "n": 3,
@@ -686,7 +736,24 @@ export const content: ContentBundle = {
             "anchor": {
               "word": null,
               "ta": "இலை"
-            }
+            },
+            "soundWords": [
+              {
+                "ta": "இலை",
+                "en": "leaf",
+                "emoji": "🍃"
+              },
+              {
+                "ta": "இறால்",
+                "en": "prawn",
+                "emoji": "🦐"
+              },
+              {
+                "ta": "இதயம்",
+                "en": "heart",
+                "emoji": "❤️"
+              }
+            ]
           },
           {
             "n": 4,
@@ -696,7 +763,24 @@ export const content: ContentBundle = {
             "anchor": {
               "character": "mayil",
               "ta": "மயில்"
-            }
+            },
+            "soundWords": [
+              {
+                "ta": "மயில்",
+                "en": "peacock",
+                "emoji": "🦚"
+              },
+              {
+                "ta": "மரம்",
+                "en": "tree",
+                "emoji": "🌳"
+              },
+              {
+                "ta": "மாம்பழம்",
+                "en": "mango",
+                "emoji": "🥭"
+              }
+            ]
           },
           {
             "n": 5,
@@ -706,7 +790,24 @@ export const content: ContentBundle = {
             "anchor": {
               "word": "paal",
               "ta": "பால்"
-            }
+            },
+            "soundWords": [
+              {
+                "ta": "பால்",
+                "en": "milk",
+                "emoji": "🥛"
+              },
+              {
+                "ta": "பந்து",
+                "en": "ball",
+                "emoji": "⚽"
+              },
+              {
+                "ta": "பூ",
+                "en": "flower",
+                "emoji": "🌸"
+              }
+            ]
           },
           {
             "n": 6,
@@ -716,7 +817,24 @@ export const content: ContentBundle = {
             "anchor": {
               "character": "kili",
               "ta": "கிளி"
-            }
+            },
+            "soundWords": [
+              {
+                "ta": "கிளி",
+                "en": "parrot",
+                "emoji": "🦜"
+              },
+              {
+                "ta": "கார்",
+                "en": "car",
+                "emoji": "🚗"
+              },
+              {
+                "ta": "கை",
+                "en": "hand",
+                "emoji": "✋"
+              }
+            ]
           },
           {
             "n": 7,
@@ -726,7 +844,24 @@ export const content: ContentBundle = {
             "anchor": {
               "character": "nandu",
               "ta": "நண்டு"
-            }
+            },
+            "soundWords": [
+              {
+                "ta": "நண்டு",
+                "en": "crab",
+                "emoji": "🦀"
+              },
+              {
+                "ta": "நாய்",
+                "en": "dog",
+                "emoji": "🐕"
+              },
+              {
+                "ta": "நிலா",
+                "en": "moon",
+                "emoji": "🌙"
+              }
+            ]
           },
           {
             "n": 8,
@@ -736,7 +871,24 @@ export const content: ContentBundle = {
             "anchor": {
               "word": null,
               "ta": "டப்பா"
-            }
+            },
+            "soundWords": [
+              {
+                "ta": "டப்பா",
+                "en": "tin box",
+                "emoji": "🥫"
+              },
+              {
+                "ta": "டம்ளர்",
+                "en": "steel tumbler",
+                "emoji": "🥛"
+              },
+              {
+                "ta": "டிரம்",
+                "en": "drum",
+                "emoji": "🥁"
+              }
+            ]
           },
           {
             "n": 9,
@@ -746,7 +898,24 @@ export const content: ContentBundle = {
             "anchor": {
               "word": "thaatha",
               "ta": "தாத்தா"
-            }
+            },
+            "soundWords": [
+              {
+                "ta": "தாத்தா",
+                "en": "grandpa",
+                "emoji": "👴"
+              },
+              {
+                "ta": "தண்ணீர்",
+                "en": "water",
+                "emoji": "💧"
+              },
+              {
+                "ta": "தக்காளி",
+                "en": "tomato",
+                "emoji": "🍅"
+              }
+            ]
           },
           {
             "n": 10,
@@ -756,7 +925,24 @@ export const content: ContentBundle = {
             "anchor": {
               "word": null,
               "ta": "உப்பு"
-            }
+            },
+            "soundWords": [
+              {
+                "ta": "உப்பு",
+                "en": "salt",
+                "emoji": "🧂"
+              },
+              {
+                "ta": "உடை",
+                "en": "dress",
+                "emoji": "👗"
+              },
+              {
+                "ta": "உருளைக்கிழங்கு",
+                "en": "potato",
+                "emoji": "🥔"
+              }
+            ]
           },
           {
             "n": 11,
@@ -766,7 +952,24 @@ export const content: ContentBundle = {
             "anchor": {
               "word": "vaazhai",
               "ta": "வாழைப்பழம்"
-            }
+            },
+            "soundWords": [
+              {
+                "ta": "வாழைப்பழம்",
+                "en": "banana",
+                "emoji": "🍌"
+              },
+              {
+                "ta": "வாத்து",
+                "en": "duck",
+                "emoji": "🦆"
+              },
+              {
+                "ta": "வீடு",
+                "en": "house",
+                "emoji": "🏠"
+              }
+            ]
           },
           {
             "n": 12,
@@ -776,7 +979,24 @@ export const content: ContentBundle = {
             "anchor": {
               "word": null,
               "ta": "லட்டு"
-            }
+            },
+            "soundWords": [
+              {
+                "ta": "லட்டு",
+                "en": "laddu",
+                "emoji": "🟡"
+              },
+              {
+                "ta": "லாரி",
+                "en": "lorry",
+                "emoji": "🚚"
+              },
+              {
+                "ta": "லைட்",
+                "en": "light",
+                "emoji": "💡"
+              }
+            ]
           }
         ]
       },
@@ -811,5 +1031,224 @@ export const content: ContentBundle = {
         }
       ]
     }
+  },
+  "reading": {
+    "version": 1,
+    "_doc": "Reading Line (written register). Every word and book line must decode with only the Letters Line letters (vowels give their signs: ஆ -> ா, இ -> ி, உ -> ு; no pulli yet). app-rn/src/core/__tests__/reading.test.ts enforces it. Books are meant to be reread: short, repetitive, one picture per page.",
+    "words": [
+      {
+        "id": "maamaa",
+        "ta": "மாமா",
+        "translit": "maamaa",
+        "en": "uncle",
+        "emoji": "👨"
+      },
+      {
+        "id": "kaadhu",
+        "ta": "காது",
+        "translit": "kaadhu",
+        "en": "ear",
+        "emoji": "👂"
+      },
+      {
+        "id": "maadu",
+        "ta": "மாடு",
+        "translit": "maadu",
+        "en": "cow",
+        "emoji": "🐄"
+      },
+      {
+        "id": "aadu",
+        "ta": "ஆடு",
+        "translit": "aadu",
+        "en": "goat",
+        "emoji": "🐐"
+      },
+      {
+        "id": "kaadu",
+        "ta": "காடு",
+        "translit": "kaadu",
+        "en": "forest",
+        "emoji": "🌳"
+      },
+      {
+        "id": "padagu",
+        "ta": "படகு",
+        "translit": "padagu",
+        "en": "boat",
+        "emoji": "⛵"
+      },
+      {
+        "id": "puli",
+        "ta": "புலி",
+        "translit": "puli",
+        "en": "tiger",
+        "emoji": "🐅"
+      },
+      {
+        "id": "thaadi",
+        "ta": "தாடி",
+        "translit": "thaadi",
+        "en": "beard",
+        "emoji": "🧔"
+      },
+      {
+        "id": "kudhi",
+        "ta": "குதி",
+        "translit": "kudhi",
+        "en": "jump",
+        "emoji": "🦘"
+      },
+      {
+        "id": "kudi",
+        "ta": "குடி",
+        "translit": "kudi",
+        "en": "drink",
+        "emoji": "🥤"
+      },
+      {
+        "id": "padu",
+        "ta": "படு",
+        "translit": "padu",
+        "en": "lie down",
+        "emoji": "😴"
+      },
+      {
+        "id": "paadu",
+        "ta": "பாடு",
+        "translit": "paadu",
+        "en": "sing",
+        "emoji": "🎤"
+      },
+      {
+        "id": "vaa",
+        "ta": "வா",
+        "translit": "vaa",
+        "en": "come",
+        "emoji": "👋"
+      },
+      {
+        "id": "padi",
+        "ta": "படி",
+        "translit": "padi",
+        "en": "read",
+        "emoji": "📖"
+      },
+      {
+        "id": "paadhi",
+        "ta": "பாதி",
+        "translit": "paadhi",
+        "en": "half",
+        "emoji": "🌗"
+      },
+      {
+        "id": "naadu",
+        "ta": "நாடு",
+        "translit": "naadu",
+        "en": "country",
+        "emoji": "🗺️"
+      }
+    ],
+    "books": [
+      {
+        "id": "idhu",
+        "title": "இது",
+        "titleEn": "This Is",
+        "cover": "🐄",
+        "pages": [
+          {
+            "ta": "இது மாடு.",
+            "en": "This is a cow.",
+            "art": "🐄"
+          },
+          {
+            "ta": "இது ஆடு.",
+            "en": "This is a goat.",
+            "art": "🐐"
+          },
+          {
+            "ta": "இது படகு.",
+            "en": "This is a boat.",
+            "art": "⛵"
+          },
+          {
+            "ta": "அது புலி!",
+            "en": "That is a tiger!",
+            "art": "🐅"
+          },
+          {
+            "ta": "புலி, வா!",
+            "en": "Tiger, come!",
+            "art": "🐅👋"
+          }
+        ]
+      },
+      {
+        "id": "maamaa",
+        "title": "மாமா",
+        "titleEn": "Uncle",
+        "cover": "👨",
+        "pages": [
+          {
+            "ta": "மாமா, வா!",
+            "en": "Uncle, come!",
+            "art": "👨👋"
+          },
+          {
+            "ta": "மாமா, பாடு!",
+            "en": "Uncle, sing!",
+            "art": "👨🎤"
+          },
+          {
+            "ta": "மாமா, குதி!",
+            "en": "Uncle, jump!",
+            "art": "👨🦘"
+          },
+          {
+            "ta": "மாமா, படு!",
+            "en": "Uncle, lie down!",
+            "art": "👨😴"
+          },
+          {
+            "ta": "மாமா, படி!",
+            "en": "Uncle, read!",
+            "art": "👨📖"
+          }
+        ]
+      },
+      {
+        "id": "kaadu",
+        "title": "காடு",
+        "titleEn": "The Forest",
+        "cover": "🌳",
+        "pages": [
+          {
+            "ta": "இது காடு.",
+            "en": "This is the forest.",
+            "art": "🌳🌳"
+          },
+          {
+            "ta": "அது புலி.",
+            "en": "That is a tiger.",
+            "art": "🐅"
+          },
+          {
+            "ta": "புலி, குதி!",
+            "en": "Tiger, jump!",
+            "art": "🐅🦘"
+          },
+          {
+            "ta": "புலி, குடி!",
+            "en": "Tiger, drink!",
+            "art": "🐅💧"
+          },
+          {
+            "ta": "புலி, படு!",
+            "en": "Tiger, lie down!",
+            "art": "🐅😴"
+          }
+        ]
+      }
+    ]
   }
 };

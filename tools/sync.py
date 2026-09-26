@@ -9,7 +9,8 @@ script writes carry a GENERATED header; never hand-edit them.
 
 Outputs
   app-rn/src/generated/tokens.ts        design tokens as a typed const
-  app-rn/src/generated/content.ts       words, rules, curriculum
+  app-rn/src/generated/content.ts       words, rules, curriculum, reading
+  app-rn/src/generated/strokes.ts       letter outlines + stroke order (from strokes.json)
   app-rn/src/generated/art.ts           SVG markup keyed by asset name
   ios/TamilTrain/Generated/Tokens.swift Color/size tokens for SwiftUI
   ios/TamilTrain/Assets.xcassets/...    one vector imageset per SVG
@@ -40,6 +41,8 @@ tokens = load("design/tokens.json")
 words = load("content/words.json")
 rules = load("content/rules.json")
 curriculum = load("content/curriculum.json")
+reading = load("content/reading.json")
+strokes = load("content/strokes.json")  # written by tools/letter_strokes.py
 
 
 def camel_to_swift(name: str) -> str:
@@ -65,7 +68,12 @@ put("app-rn/src/generated/tokens.ts",
 
 put("app-rn/src/generated/content.ts",
     f"// {HEADER}\nimport type {{ ContentBundle }} from '../core/types';\n\n"
-    f"export const content: ContentBundle = {json.dumps({'words': words, 'rules': rules, 'curriculum': curriculum}, indent=2, ensure_ascii=False)};\n")
+    f"export const content: ContentBundle = {json.dumps({'words': words, 'rules': rules, 'curriculum': curriculum, 'reading': reading}, indent=2, ensure_ascii=False)};\n")
+
+# Stroke data is large and only the Letters Line needs it, so it gets its own module.
+put("app-rn/src/generated/strokes.ts",
+    f"// {HEADER}\nimport type {{ LetterStrokes }} from '../core/types';\n\n"
+    f"export const strokes: Record<string, LetterStrokes> = {json.dumps(strokes['glyphs'], ensure_ascii=False, separators=(',', ':'))};\n")
 
 art_lines = [f"// {HEADER}", "export const art = {"]
 for name, f in ART.items():
@@ -106,7 +114,7 @@ for name, f in ART.items():
         "properties": {"preserves-vector-representation": True},
     }, indent=2) + "\n")
 
-for rel in ("content/words.json", "content/rules.json", "content/curriculum.json"):
+for rel in ("content/words.json", "content/rules.json", "content/curriculum.json", "content/reading.json", "content/strokes.json"):
     put(f"ios/TamilTrainCore/Sources/TamilTrainCore/Resources/{Path(rel).name}", (SHARED / rel).read_text())
 
 
