@@ -6,10 +6,12 @@ import { Art, WordPicture } from '../components/Art';
 import { ChunkyButton, HoldToExit } from '../components/Buttons';
 import { advance, grownUpSaid, reportAction, skipStop, startTrip, tapPicture, type TripDeps, type TripState } from '../core';
 import { content } from '../generated/content';
+import { canSay, say, slotsFor, stopVoice } from '../audio/voice';
 import { useApp } from '../state/AppState';
 import { C, F, R, drop } from '../theme';
 
 const CHEERS = ['சபாஷ்!', 'சூப்பர்!', 'கரெக்ட்!', 'அருமை!'];
+const voiceName = (slot: string) => content.curriculum.voices.slots.find((v) => v.id === slot)?.ta ?? slot;
 
 export function TripScreen() {
   const { state, getProgress, saveProgress, finishSession } = useApp();
@@ -32,6 +34,7 @@ export function TripScreen() {
   );
   const [trip, setTrip] = useState<TripState>(() => startTrip(state.settings, deps));
   const [cheer, setCheer] = useState<string | null>(null);
+  const [voice, setVoice] = useState(false);
   const finished = useRef(false);
 
   useEffect(() => {
@@ -46,6 +49,16 @@ export function TripScreen() {
     const id = setTimeout(() => { setCheer(null); setTrip((t) => advance(t, deps)); }, ms);
     return () => clearTimeout(id);
   }, [trip.stop?.phase, trip.stop?.index, deps]);
+
+  // Show "Play voice" only when a family recording (or a Tamil TTS voice) can say this word.
+  const wordId = trip.stop?.word.id;
+  useEffect(() => {
+    let live = true;
+    setVoice(false);
+    if (wordId) canSay(state, wordId).then((ok) => live && setVoice(ok));
+    return () => { live = false; };
+  }, [wordId, state]);
+  useEffect(() => stopVoice, []);
 
   const stop = trip.stop;
   if (!stop) return <View style={{ flex: 1, backgroundColor: C.jasmine }} />;
@@ -89,7 +102,16 @@ export function TripScreen() {
             {stop.word.translit}{trip.settings.showGloss ? ` · ${stop.word.en}` : ''}
           </Text>
         </Pressable>
-        <ChunkyButton label={locked ? 'I said it' : 'Said ✓'} disabled={!locked} onPress={() => setTrip(grownUpSaid)} />
+        <View style={{ gap: 8 }}>
+          <ChunkyButton label={locked ? 'I said it' : 'Said ✓'} disabled={!locked} onPress={() => setTrip(grownUpSaid)} />
+          {voice && (
+            <ChunkyButton
+              label={slotsFor(state, stop.word.id).length ? `▶ ${voiceName(slotsFor(state, stop.word.id)[0])}` : '▶ Play'}
+              color={C.peacock} under={C.peacockDeep}
+              onPress={() => { say(state, stop.word.id, stop.word.ta); setTrip(grownUpSaid); }}
+            />
+          )}
+        </View>
       </View>
 
       {/* Answers */}

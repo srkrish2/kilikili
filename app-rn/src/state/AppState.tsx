@@ -27,7 +27,12 @@ interface AppState {
   finishSession: (log: Omit<SessionLog, 'day'>, result: SessionResult) => void;
   lastResult: SessionResult | null;
   replaceState: (s: SavedState) => void;
+  /** Grown-ups gate: open for a few minutes after a correct answer (memory only). */
+  gateOpen: () => boolean;
+  openGate: () => void;
 }
+
+const GATE_MS = 5 * 60 * 1000;
 
 const Ctx = createContext<AppState | null>(null);
 
@@ -39,6 +44,7 @@ export function AppStateProvider({ children }: { children: ReactNode }) {
   const [state, setState] = useState<SavedState | null>(null);
   const [lastResult, setLastResult] = useState<SessionResult | null>(null);
   const latest = useRef<SavedState | null>(null);
+  const gateUntil = useRef(0);
 
   useEffect(() => {
     AsyncStorage.getItem(KEY)
@@ -77,6 +83,8 @@ export function AppStateProvider({ children }: { children: ReactNode }) {
     },
     lastResult,
     replaceState: (s) => update(() => s),
+    gateOpen: () => Date.now() < gateUntil.current,
+    openGate: () => { gateUntil.current = Date.now() + GATE_MS; },
   }, [state, update, lastResult]);
 
   if (!value) return null;
