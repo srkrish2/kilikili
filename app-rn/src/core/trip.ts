@@ -31,6 +31,8 @@ export interface TripState {
 
 export interface TripDeps {
   words: Word[];
+  /** Restrict which words are asked (a station ride); distractors still come from `words`. */
+  pickFrom?: Word[];
   rules: Rules;
   rng: Rng;
   getProgress: () => Record<string, WordProgress>;
@@ -53,7 +55,7 @@ function makeStop(t: TripState, deps: TripDeps): TripState {
   if (t.stopIndex >= t.settings.length) return { ...t, stop: null, finished: true };
   const kind: Word['kind'] = isActionStop(t.stopIndex, t.settings, deps.rules) ? 'action' : 'picture';
   const word = pickWord({
-    words: deps.words, progress: deps.getProgress(), used: new Set(t.used), stopIndex: t.stopIndex,
+    words: deps.pickFrom ?? deps.words, progress: deps.getProgress(), used: new Set(t.used), stopIndex: t.stopIndex,
     today: t.today, scoring: deps.rules.scoring, picker: deps.rules.picker, rng: deps.rng,
   }, kind);
   if (!word) return { ...t, stop: null, finished: true };

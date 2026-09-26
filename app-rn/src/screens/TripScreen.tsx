@@ -1,4 +1,4 @@
-import { router } from 'expo-router';
+import { router, useLocalSearchParams } from 'expo-router';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { Pressable, Text, View, useWindowDimensions } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
@@ -15,13 +15,16 @@ const voiceName = (slot: string) => content.curriculum.voices.slots.find((v) => 
 
 export function TripScreen() {
   const { state, getProgress, saveProgress, finishSession } = useApp();
+  // A station ride asks only that station's words (Map › Station › "Ride this station again").
+  const { station } = useLocalSearchParams<{ station?: string }>();
+  const started = useRef(Date.now());
   const onExit = () => router.back();
   const onDone = (trip: TripState) => {
     const { stats } = trip;
     let line = `${stats.firstTry} of ${stats.pictureStops} picture stops right on the first tap`;
     if (stats.actionStops) line += `; ${stats.didAction} of ${stats.actionStops} actions without a demo`;
     finishSession(
-      { kind: 'trip', right: stats.firstTry + stats.didAction, of: stats.pictureStops + stats.actionStops },
+      { kind: 'trip', label: station, right: stats.firstTry + stats.didAction, of: stats.pictureStops + stats.actionStops, secs: (Date.now() - started.current) / 1000 },
       { kind: 'trip', title: 'சூப்பர்!', subtitle: "Koo's wagons are full.", cargo: trip.cargo.map((id, i) => ({ key: `${id}-${i}`, wordId: id })), grownupLine: line },
     );
     router.replace('/done');
@@ -29,10 +32,18 @@ export function TripScreen() {
   const insets = useSafeAreaInsets();
   const { width } = useWindowDimensions();
   const deps: TripDeps = useMemo(
-    () => ({ words: content.words.words, rules: content.rules, rng: Math.random, getProgress, saveProgress }),
-    [getProgress, saveProgress],
+    () => {
+      const pickFrom = station ? content.words.words.filter((w) => w.category === station) : undefined;
+      return { words: content.words.words, pickFrom, rules: content.rules, rng: Math.random, getProgress, saveProgress };
+    },
+    [getProgress, saveProgress, station],
   );
-  const [trip, setTrip] = useState<TripState>(() => startTrip(state.settings, deps));
+  const [trip, setTrip] = useState<TripState>(() => {
+    const pictures = deps.pickFrom?.filter((w) => w.kind === 'picture').length;
+    // A station ride is at most as long as the station, with no action stops.
+    const settings = pictures ? { ...state.settings, length: Math.min(state.settings.length, pictures), actionStops: false } : state.settings;
+    return startTrip(settings, deps);
+  });
   const [cheer, setCheer] = useState<string | null>(null);
   const [voice, setVoice] = useState(false);
   const finished = useRef(false);

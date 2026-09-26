@@ -75,4 +75,19 @@ describe('trip', () => {
     expect(new Set(s.options.map((o) => o.id)).size).toBe(4);
     expect(s.options.filter((o) => o.category === s.word.category).length).toBeGreaterThanOrEqual(2);
   });
+
+  it('rides one station: asks only its words, with pictures from everywhere', () => {
+    const { d } = deps(7);
+    const food = content.words.words.filter((w) => w.category === 'food');
+    const station = { ...d, pickFrom: food };
+    let t = startTrip({ ...settings, actionStops: false, length: 6 }, station, '2026-09-25');
+    while (!t.finished) {
+      const s = t.stop!;
+      expect(s.word.category).toBe('food');
+      expect(s.options).toHaveLength(3);
+      expect(s.options.some((o) => o.category !== 'food')).toBe(true);
+      t = advance(tapPicture(grownUpSaid(t), s.word.id, station), station);
+    }
+  });
 });
+

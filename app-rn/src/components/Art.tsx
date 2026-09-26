@@ -17,3 +17,12 @@ export function WordPicture({ word, size }: { word: Word; size: number }) {
     </View>
   );
 }
+
+const KOO_BOILER = '#F2546B';
+
+/** Koo in the engine colour chosen in the Wagon yard. */
+export function Koo({ colour, width, height }: { colour: string; width: number; height?: number }) {
+  const xml = colour === KOO_BOILER ? art['char-koo']
+    : art['char-koo'].replaceAll(KOO_BOILER, colour).replace('fill="#FF7A8C"', 'fill="#FFFFFF" opacity="0.3"');
+  return <SvgXml xml={xml} width={width} height={height ?? width * (160 / 220)} />;
+}

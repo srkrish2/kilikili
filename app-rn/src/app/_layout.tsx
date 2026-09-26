@@ -27,6 +27,10 @@ export default function RootLayout() {
           <Stack.Screen name="(tabs)" />
           <Stack.Screen name="trip" options={SESSION} />
           <Stack.Screen name="lesson/[n]" options={SESSION} />
+          <Stack.Screen name="blend" options={SESSION} />
+          <Stack.Screen name="book/[id]" options={SESSION} />
+          <Stack.Screen name="game/[id]" options={SESSION} />
+          <Stack.Screen name="check" options={SESSION} />
           <Stack.Screen name="done" options={{ ...SESSION, animation: 'slide_from_bottom' }} />
         </Stack>
       </AppStateProvider>
