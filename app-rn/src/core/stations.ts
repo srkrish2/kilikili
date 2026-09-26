@@ -56,3 +56,30 @@ export function engineColours(s: SavedState, rules: Rules): { unlocked: number; 
   const unlocked = Math.min(all.length, 1 + Math.floor(trips / tripsPerColour));
   return { unlocked, toNext: unlocked >= all.length ? null : tripsPerColour - (trips % tripsPerColour) };
 }
+
+export interface WeekSummary {
+  sessions: number;
+  trips: number;
+  minutes: number;
+  strongest: Station | null;
+  weakest: Station | null;
+}
+
+/**
+ * The grown-ups' "this week" line: sessions and minutes in the last 7 days (games
+ * included in minutes), plus the strongest and weakest station he has started.
+ */
+export function weekSummary(s: SavedState, c: ContentBundle, today: string): WeekSummary {
+  const t = Date.parse(`${today}T00:00:00Z`);
+  const recent = s.history.filter((h) => { const d = (t - Date.parse(`${h.day}T00:00:00Z`)) / 86_400_000; return d >= 0 && d < 7; });
+  const started = stations(s, c).filter((st) => c.words.words.some((w) => w.category === st.id && (s.progress[w.id]?.n ?? 0) > 0));
+  const share = (st: Station) => st.known / st.total;
+  const sorted = started.slice().sort((a, b) => share(b) - share(a));
+  return {
+    sessions: recent.filter((h) => h.kind !== 'game').length,
+    trips: recent.filter((h) => h.kind === 'trip').length,
+    minutes: Math.round(recent.reduce((m, h) => m + (h.secs ?? 0), 0) / 60),
+    strongest: sorted.length > 1 ? sorted[0] : null,
+    weakest: sorted.length > 1 ? sorted[sorted.length - 1] : null,
+  };
+}

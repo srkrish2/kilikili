@@ -3,6 +3,12 @@
 A parent-led Tamil listening → letters → reading app for young children.
 Native SwiftUI on iOS; Expo/React Native for Android. Both are driven by the same content, rules, art and test vectors in `shared/`.
 
+**Status:** the Expo app (`app-rn/`) has the whole product: onboarding, listening trips, family
+voice recordings, the railway map and stations, the 8-step Letters Line with stroke-order
+tracing, the Reading Line (blending and decodable books), four games with a daily limit, the
+Wagon yard, and the grown-ups area (dashboard, voices, settings, export/import). It runs on
+Android, iPhone/iPad (Expo Go) and the web. The SwiftUI app is still the starter; see CLAUDE.md.
+
 ## Add this bundle to your repo
 
 ```bash
@@ -24,11 +30,12 @@ cd ios && xcodegen && open TamilTrain.xcodeproj
 Pick your team under Signing, plug in your iPhone, and press Run. Full steps are in [ios/README.md](ios/README.md).
 The core logic tests: `cd ios/TamilTrainCore && swift test`.
 
-## Android / Expo (later)
+## Expo (Android, iPhone, web)
 
 ```bash
 cd app-rn && npm install
-npx expo start           # scan the QR code with Expo Go on an Android phone (or iPhone)
+npx expo start           # scan the QR code with Expo Go on an Android phone or iPhone
+npx expo start --web     # or try it in a browser
 npm run check            # generated-file check + typecheck + tests
 ```
 

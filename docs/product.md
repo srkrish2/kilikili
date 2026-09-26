@@ -1,7 +1,8 @@
 # Product spec: screens and navigation
 
 Source: the wireframes canvas (21 screens plus a screen map) and the illustration canvas.
-Links are in CLAUDE.md. "Starter" marks what this bundle already builds, in both apps.
+Links are in CLAUDE.md. "Starter" marks what the original bundle built in both apps; every screen
+below is now built in the Expo app (`app-rn/src/screens`), and the SwiftUI app is still at the starter.
 
 ## Screens
 
@@ -23,7 +24,7 @@ Links are in CLAUDE.md. "Starter" marks what this bundle already builds, in both
 | Reading | Shelf | Decodable books, unlocked by the letters he knows | |
 | | Reader | Page-by-page book, written Tamil, tap-to-hear | |
 | Games | GamesHub | 10-min/day play area | |
-| | Game | One game (Nandu's beach checks, memory, sound hunt) | |
+| | Game | One game: Cricket Words, Song Time, Train Yard, Kolam Trace (from the wireframes) | |
 | Grown-ups | Gate | Math word problem before entry (App Store Kids requirement) | |
 | | Dashboard | Known / emerging / not-yet by category; trip history | |
 | | Voices | Manage family recordings per word | |

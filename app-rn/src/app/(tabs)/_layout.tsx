@@ -1,6 +1,8 @@
+import { Redirect } from 'expo-router';
 import Tabs, { type BottomTabBarProps } from 'expo-router/js-tabs';
 import { Pressable, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { useApp } from '../../state/AppState';
 import { C, F, R } from '../../theme';
 
 const TABS: Record<string, { label: string; ta: string; icon: string }> = {
@@ -33,6 +35,9 @@ function TabBar({ state, navigation }: BottomTabBarProps) {
 }
 
 export default function TabsLayout() {
+  const { state } = useApp();
+  // First launch: Welcome -> profile -> listening check -> voices, then the tabs.
+  if (!state.onboarded) return <Redirect href="/welcome" />;
   return (
     <Tabs tabBar={(p) => <TabBar {...p} />} screenOptions={{ headerShown: false, sceneStyle: { backgroundColor: C.jasmine } }}>
       <Tabs.Screen name="index" />

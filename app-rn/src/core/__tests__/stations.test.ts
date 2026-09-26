@@ -3,7 +3,7 @@ import { content } from '../../generated/content';
 import { curriculumLetters } from '../letters';
 import { firstWordsToRecord, seedPriors } from '../onboarding';
 import { blendScript, meetScript, songLines } from '../scripts';
-import { currentStation, engineColours, stations, yardCargo } from '../stations';
+import { currentStation, engineColours, stations, weekSummary, yardCargo } from '../stations';
 import { status } from '../tracer';
 import { known, state } from './helpers';
 
@@ -57,5 +57,24 @@ describe('scripts', () => {
   it('builds songs and blending lines', () => {
     expect(songLines(ma)[0]).toBe('ம ம மயில்!');
     expect(blendScript('மாடு').ta).toBe('மெதுவா: மா… டு. இப்போ வேகமா!');
+  });
+});
+
+describe('week summary', () => {
+  it('counts the last 7 days and names the strongest and weakest station', () => {
+    const food = Object.fromEntries(words.filter((w) => w.category === 'food').map((w) => [w.id, known]));
+    const s = state({
+      progress: { ...food, kai: { ...known, p: 0.3, c: 0 } },
+      history: [
+        { day: '2026-09-10', kind: 'trip', secs: 600 },
+        { day: '2026-09-20', kind: 'trip', secs: 420 },
+        { day: '2026-09-21', kind: 'lesson', secs: 480 },
+        { day: '2026-09-21', kind: 'game', secs: 300 },
+      ],
+    });
+    const w = weekSummary(s, content, '2026-09-22');
+    expect(w).toMatchObject({ sessions: 2, trips: 1, minutes: 20 });
+    expect(w.strongest?.id).toBe('food');
+    expect(w.weakest?.id).toBe('body');
   });
 });

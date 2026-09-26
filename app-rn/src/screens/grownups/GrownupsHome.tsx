@@ -1,5 +1,5 @@
 import { Text, View } from 'react-native';
-import { curriculumLetters, knownLetters, lineStatuses, status, type SessionLog, type WordStatus } from '../../core';
+import { curriculumLetters, dayKey, knownLetters, lineStatuses, stations, status, weekSummary, type SessionLog, type WordStatus } from '../../core';
 import { content } from '../../generated/content';
 import { useApp } from '../../state/AppState';
 import { C, F, R } from '../../theme';
@@ -35,6 +35,16 @@ export function GrownupsHome() {
             </View>
           ))}
         </View>
+        <Label>WORDS KNOWN BY STATION</Label>
+        {stations(state, content).map((st) => (
+          <View key={st.id} style={{ flexDirection: 'row', alignItems: 'center', gap: 10 }}>
+            <Text style={{ width: 96, fontFamily: F.bold, fontSize: 15, color: C.ink }}>{st.en}</Text>
+            <View style={{ flex: 1, height: 10, borderRadius: 5, backgroundColor: C.jasmine, overflow: 'hidden' }}>
+              <View style={{ width: `${(st.known / st.total) * 100}%`, height: '100%', backgroundColor: C.peacock }} />
+            </View>
+            <Text style={{ width: 40, textAlign: 'right', fontFamily: F.bold, fontSize: 14, color: C.inkMuted }}>{st.known}/{st.total}</Text>
+          </View>
+        ))}
         <LinkRow icon="🗂️" title="Every word, by category" sub="How sure the app is, and why" href="/grownups/words" />
         <LinkRow icon="✏️" title="Letters" sub={`${lettersKnown} of ${letters.length} known${lines.letters.unlocked ? '' : ` · Letters Line opens at ${lines.letters.need} words (${lines.letters.have} now)`}`} href="/grownups/letters" />
       </Card>
@@ -47,6 +57,11 @@ export function GrownupsHome() {
       </Card>
 
       <Card>
+        <Label>THIS WEEK</Label>
+        {(() => {
+          const w = weekSummary(state, content, dayKey());
+          return <Body>{w.trips} trip{w.trips === 1 ? '' : 's'} · {w.sessions} session{w.sessions === 1 ? '' : 's'} · {w.minutes} min{w.strongest ? ` · strongest: ${w.strongest.en}` : ''}{w.weakest ? ` · needs work: ${w.weakest.en}` : ''}</Body>;
+        })()}
         <Label>RECENT SESSIONS</Label>
         {state.history.length === 0 ? <Body muted>Nothing yet. Start a trip from the Trip tab.</Body> : (
           [...state.history].reverse().slice(0, 10).map((h, i) => (
