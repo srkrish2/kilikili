@@ -1,90 +1,60 @@
-# கிளிகிளி · Kilikili
+# Tamil Train
 
-A reading.com-style app for learning to read **Tamil**: a guided path of short
-lessons covering letter recognition and word reading, plus read-aloud books.
-It runs in the browser and installs to a tablet or phone home screen.
+A parent-led Tamil listening → letters → reading app for young children.
+Native SwiftUI on iOS; Expo/React Native for Android. Both are driven by the same content, rules, art and test vectors in `shared/`.
 
-## What's inside
+**Status:** the Expo app (`app-rn/`) has the whole product: onboarding, listening trips, family
+voice recordings, the railway map and stations, the 8-step Letters Line with stroke-order
+tracing, the Reading Line (blending and decodable books), four games with a daily limit, the
+Wagon yard, and the grown-ups area (dashboard, voices, settings, export/import). It runs on
+Android, iPhone/iPad (Expo Go) and the web. The SwiftUI app is still the starter; see CLAUDE.md.
 
-**Learning path** (`src/content/lessons.ts`). 23 lessons in three units:
-
-1. **உயிர் எழுத்துகள்**: the 12 vowels and ஃ
-2. **மெய் எழுத்துகள்**: the 18 consonants (taught as க = "ka"), the pulli (்), then the first words
-3. **உயிர்மெய் எழுத்துகள்**: vowel signs (ா, ி ீ, ு ூ, ெ ே ை, ொ ோ ௌ), each followed by a word lesson
-
-Each lesson unlocks the next. A test checks that every word lesson uses only
-letters taught before it, so all words can be sounded out.
-
-**Letter activities**
-- *Meet*: big letter, its sound, and a picture word with the letter highlighted (க் + ஆ = கா for vowel signs)
-- *Trace*: finger tracing over the letter, scored by how much of the glyph is covered (so no stroke data is needed)
-- *Where is…?*: hear a sound, tap the matching letter. A wrong tap names the letter the child picked.
-- *Bubble pop*: pop every bubble showing the target letter
-
-**Word activities**
-- *Blend*: tap each letter tile (அ · ம் · மா), then hear it blend into the word and see the picture
-- *Read & match*: read the word, pick its picture
-- *Listen*: hear the word, pick how it's written
-- *Build*: put the letter tiles in order
-
-**Books** (`src/content/books.ts`). Six short books read aloud word by word with
-highlighting. Tap any word to hear it. Swipe to turn pages.
-
-**Letters tab**: the full alphabet chart, including all 216 உயிர்மெய் letters. Tap any letter to hear it.
-
-**Parents tab** (behind a simple sum): progress, speech speed, English
-translations, word-by-word or sentence reading, unlock everything, and a reset.
-
-Progress is saved on the device in localStorage. There is no account or server.
-
-## Audio
-
-Speech uses the device's Tamil (ta-IN) text-to-speech voice:
-
-- **Android / Chrome**: works once the Google Tamil voice is installed
-  (Settings → Text-to-speech).
-- **Windows**: add Tamil under Settings → Speech.
-- **iPad / iPhone**: no built-in Tamil voice, so use recorded clips (below).
-
-The Parents tab shows whether a Tamil voice was found.
-
-### Recorded clips
-
-Any text listed in `public/audio/manifest.json` plays from a clip instead of
-text-to-speech:
+## Add this bundle to your repo
 
 ```bash
-npm run speech:texts                  # every phrase the app can say -> speech-texts.json (~420)
-pip install google-cloud-texttospeech
-python scripts/generate_audio.py      # -> public/audio/*.mp3 + manifest.json
+cd your-repo
+unzip ~/Downloads/tamil-train-bundle.zip -d .     # creates the files at the repo root
+python3 tools/sync.py                              # regenerate derived files
+git add -A && git commit -m "Tamil Train starter: shared content, SwiftUI app, Expo app"
 ```
 
-You can also map entries to your own recordings.
+The zip doesn't include `node_modules/` or an `.xcodeproj`. Both are regenerated (see below).
 
-## Development
+## iOS (first build)
 
 ```bash
-npm install
-npm run dev        # http://localhost:5173
-npm test           # content integrity and lesson-plan tests
-npm run build
+brew install xcodegen
+cd ios && xcodegen && open TamilTrain.xcodeproj
 ```
 
-Stack: Vite + React + TypeScript and HashRouter, with no UI or state libraries.
+Pick your team under Signing, plug in your iPhone, and press Run. Full steps are in [ios/README.md](ios/README.md).
+The core logic tests: `cd ios/TamilTrainCore && swift test`.
 
-- Content lives in `src/content/`: plain typed data plus Tamil grapheme helpers.
-- `src/lib/lessonPlan.ts` turns a lesson into a sequence of activity steps. It is pure and seeded, so it's testable.
+## Expo (Android, iPhone, web)
 
-### Adding content
+```bash
+cd app-rn && npm install
+npx expo start           # scan the QR code with Expo Go on an Android phone or iPhone
+npx expo start --web     # or try it in a browser
+npm run check            # generated-file check + typecheck + tests
+```
 
-- **Word**: add it to `src/content/words.ts` with an emoji, then list it in a
-  word lesson. The tests will fail if it uses a letter the child hasn't learned yet.
-- **Book**: add it to `src/content/books.ts`. `unlockAfter` names the lesson
-  that opens it.
+For a Play Store build: `npx eas-cli@latest build -p android` (free Expo account; the build runs in the cloud, no Android Studio needed).
 
-## Deploying
+## Working with Claude Code
 
-`.github/workflows/deploy.yml` tests, builds and deploys `main` to GitHub
-Pages. Enable it under **Settings → Pages → Source: GitHub Actions**. The app is
-then served at `https://<user>.github.io/kilikili/`. Open it on the tablet and
-use "Add to Home Screen".
+Open Claude Code in the repo root. `CLAUDE.md` has the product decisions, the repo rules
+(edit `shared/`, keep the two cores in step, scoring changes start in the Python spec) and the
+roadmap. Point it at one milestone at a time, for example: "build roadmap item 1, family voice
+recordings, in the SwiftUI app".
+
+## What's here
+
+| Path | What |
+|---|---|
+| `shared/` | words, rules, curriculum, design tokens, SVG art, golden test vectors, the tested prototype |
+| `tools/` | `sync.py` (shared → apps) and `scoring_reference.py` (executable scoring spec) |
+| `ios/` | XcodeGen spec, `TamilTrainCore` Swift package, SwiftUI app |
+| `app-rn/` | Expo 57 TypeScript app with the same core and screens |
+| `docs/` | screen map and linking decisions, the scoring model and its known limits |
+| `.github/workflows/ci.yml` | checks that generated files are fresh; runs the TS tests on Linux and the Swift tests on macOS |

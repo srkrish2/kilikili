@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" aria-label="Mayil the peacock">
+  <ellipse cx="100" cy="194" rx="50" ry="5" fill="#23204A" opacity="0.08"/>
+  <path d="M8 130A92 92 0 1 1 192 130Z" fill="#0E9C98"/>
+  <path d="M26 130A74 74 0 1 1 174 130Z" fill="#19BDB1"/>
+  <ellipse cx="37.6" cy="94" rx="11" ry="13" fill="#FFB627"/><circle cx="37.6" cy="95" r="6" fill="#3F4FD8"/>
+  <ellipse cx="64" cy="67.6" rx="11" ry="13" fill="#FFB627"/><circle cx="64" cy="68.6" r="6" fill="#3F4FD8"/>
+  <ellipse cx="100" cy="56" rx="11" ry="13" fill="#FFB627"/><circle cx="100" cy="57" r="6" fill="#3F4FD8"/>
+  <ellipse cx="136" cy="67.6" rx="11" ry="13" fill="#FFB627"/><circle cx="136" cy="68.6" r="6" fill="#3F4FD8"/>
+  <ellipse cx="162.4" cy="94" rx="11" ry="13" fill="#FFB627"/><circle cx="162.4" cy="95" r="6" fill="#3F4FD8"/>
+  <ellipse cx="100" cy="156" rx="30" ry="36" fill="#3F6FE0"/>
+  <ellipse cx="76" cy="156" rx="10" ry="22" fill="#2E58C4"/><ellipse cx="124" cy="156" rx="10" ry="22" fill="#2E58C4"/>
+  <rect x="86" y="116" width="28" height="34" fill="#3F6FE0"/>
+  <path d="M90 82L84 60M100 80V56M110 82L116 60" stroke="#3F6FE0" stroke-width="3.5" stroke-linecap="round"/>
+  <circle cx="84" cy="58" r="5.5" fill="#FFB627"/><circle cx="100" cy="54" r="5.5" fill="#FFB627"/><circle cx="116" cy="58" r="5.5" fill="#FFB627"/>
+  <circle cx="100" cy="106" r="30" fill="#3F6FE0"/>
+  <ellipse cx="80" cy="118" rx="5.5" ry="3.5" fill="#FF8FA3" opacity="0.85"/><ellipse cx="120" cy="118" rx="5.5" ry="3.5" fill="#FF8FA3" opacity="0.85"/>
+  <ellipse cx="89" cy="104" rx="8" ry="9.5" fill="#FFFFFF"/><ellipse cx="111" cy="104" rx="8" ry="9.5" fill="#FFFFFF"/>
+  <circle cx="91" cy="106" r="4.8" fill="#23204A"/><circle cx="109" cy="106" r="4.8" fill="#23204A"/>
+  <circle cx="92.6" cy="104" r="1.6" fill="#FFFFFF"/><circle cx="110.6" cy="104" r="1.6" fill="#FFFFFF"/>
+  <path d="M95 116L100 124L105 116Z" fill="#FFB627"/>
+  <path d="M92 190v6M108 190v6" stroke="#FFB627" stroke-width="5" stroke-linecap="round"/>
+</svg>
